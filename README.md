@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
 <html>
 <head>
     <title>Number Manager</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+			 margin: 0;
+    padding: 0;
         }
         .options-grid {
             display: flex;
@@ -34,12 +37,14 @@
             bottom: 0;
             width: 100%;
             display: flex;
+			
         }
         .button-group button {
             flex: 1;
             border: none;
-            height: 50px;
+            height: 75px;
             font-size: 18px;
+			
         }
         .button-group button:first-child {
             background-color: lightblue;
