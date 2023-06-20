@@ -138,6 +138,14 @@
                 }
             }
         }
+var buttons = document.querySelectorAll('.button-group button');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                this.focus();
+                this.blur();
+            });
+        });
+	    
  var clickTimestamp = 0;
         document.addEventListener('click', function(event) {
             var now = new Date().getTime();
