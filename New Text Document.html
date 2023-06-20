@@ -121,7 +121,7 @@
 }
 
 
-        function previousNumber() {
+       function previousNumber() {
             currentIndex = (currentIndex - 1 + numbers.length) % numbers.length;
             setNumber();
         }
@@ -133,6 +133,7 @@
                 if (searchIndex !== -1) {
                     currentIndex = searchIndex;
                     setNumber();
+			document.activeElement.blur();
                 }
             }
         }
