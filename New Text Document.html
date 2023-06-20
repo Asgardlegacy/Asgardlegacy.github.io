@@ -121,7 +121,7 @@
 }
 
 
-       function previousNumber() {
+      function previousNumber() {
             currentIndex = (currentIndex - 1 + numbers.length) % numbers.length;
             setNumber();
         }
@@ -137,6 +137,16 @@
                 }
             }
         }
+var touchStartTimestamp = 0;
+        document.addEventListener('touchstart', function(event) {
+            var now = new Date().getTime();
+            if (now - touchStartTimestamp < 500) {
+                event.preventDefault();
+            }
+            touchStartTimestamp = now;
+        }, { passive: false });
+
+	    
 
         function handleFileSelect(event) {
             var file = event.target.files[0];
