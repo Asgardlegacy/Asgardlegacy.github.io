@@ -137,14 +137,14 @@
                 }
             }
         }
-var touchStartTimestamp = 0;
-        document.addEventListener('touchstart', function(event) {
+ var clickTimestamp = 0;
+        document.addEventListener('click', function(event) {
             var now = new Date().getTime();
-            if (now - touchStartTimestamp < 500) {
+            if (event.target.matches('button') && now - clickTimestamp < 300) {
                 event.preventDefault();
             }
-            touchStartTimestamp = now;
-        }, { passive: false });
+            clickTimestamp = now;
+        });
 
 	    
 
