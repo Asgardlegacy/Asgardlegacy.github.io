@@ -42,7 +42,7 @@
             height: 75px;
             font-size: 18px;
 		touch-action: none; /* Prevent double click to zoom */
-
+}
    .option, .button-group button {
             flex: 1 1 48%;
             box-sizing: border-box;
