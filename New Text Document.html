@@ -15,6 +15,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .option, .button-group button {
             flex: 1 1 48%;
@@ -31,16 +32,18 @@
         }
         .option input[type="checkbox"] {
             display: none;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .option.checked {
             background-color: #ddd;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group {
             position: absolute;
             bottom: 0;
             width: 100%;
             display: flex;
-			
+		touch-action: none; /* Prevent double click to zoom */	
         }
         .button-group button {
             flex: 1;
