@@ -251,11 +251,11 @@
         }
 
         function nextNumber() {
-            if (currentIndex < numbers.length - 1) {
+            
                 currentIndex = (currentIndex + 1) % numbers.length;
                 setNumber();
             } 
-        }
+        
 
         function previousNumber() {
             currentIndex = (currentIndex - 1 + numbers.length) % numbers.length;
