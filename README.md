@@ -111,35 +111,26 @@
     margin-top: 10px;
   }
 
-  .upload-block {
-    position: relative;
-    flex: 1;
-    margin-right: 10px;
-    border: 1px dashed #ccc;
-    cursor: pointer;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .upload-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background-color: #f7f7f7;
-  }
-
-  .upload-text {
-    font-size: 14px;
-  }
-
-  .picture-preview {
-    display: none;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-  }
-
+ .picture-upload-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .picture-upload-container .picture-upload {
+      flex: 0 0 30%;
+      border: 1px dashed #ccc;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .picture-upload-container .picture-upload:hover {
+      background-color: #f9f9f9;
+    }
+    .picture-preview {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
         
     </style>
 </head>
@@ -160,31 +151,28 @@
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
    //the start of it all
-   
-   <div id="picture-upload" class="picture-upload-block">
-  <div class="upload-block" onclick="handlePictureUpload(0)">
-    <input type="file" id="picture-upload-0" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 0)">
-    <div class="upload-placeholder">
-      <span class="upload-text">Upload Picture</span>
-    </div>
-    <img id="picture-preview-0" class="picture-preview" style="display: none">
-  </div>
-  <div class="upload-block" onclick="handlePictureUpload(1)">
-    <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)">
-    <div class="upload-placeholder">
-      <span class="upload-text">Upload Picture</span>
-    </div>
-    <img id="picture-preview-1" class="picture-preview" style="display: none">
-  </div>
-  <div class="upload-block" onclick="handlePictureUpload(2)">
-    <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)">
-    <div class="upload-placeholder">
-      <span class="upload-text">Upload Picture</span>
-    </div>
-    <img id="picture-preview-2" class="picture-preview" style="display: none">
-  </div>
-</div>
 
+   <div class="picture-upload-container">
+    <div class="picture-upload" onclick="handlePictureUpload(0)">
+      <input type="file" id="picture-upload-0" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 0)" />
+      Upload Picture
+    </div>
+    <div class="picture-upload" onclick="handlePictureUpload(1)">
+      <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)" />
+      Upload Picture
+    </div>
+    <div class="picture-upload" onclick="handlePictureUpload(2)">
+      <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)" />
+      Upload Picture
+    </div>
+  </div>
+
+  <div id="picture-preview-container">
+    <img id="picture-preview-0" class="picture-preview" />
+    <img id="picture-preview-1" class="picture-preview" />
+    <img id="picture-preview-2" class="picture-preview" />
+  </div>
+  
    
    
  //the end of it all
