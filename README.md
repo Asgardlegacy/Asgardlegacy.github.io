@@ -15,11 +15,11 @@
         }
         .option,
         .button-group button {
-            flex: 1 1 48%;
+            flex: 1 1 50%;
             box-sizing: border-box;
             border: 1px solid #ccc;
-            margin: 2px;
-            padding: 10px;
+            margin: 0px;
+            padding: 0px;
             text-align: center;
             cursor: pointer;
         }
