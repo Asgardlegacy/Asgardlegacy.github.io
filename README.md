@@ -135,6 +135,9 @@ document.addEventListener("touchstart", function(event){
                 var index = records[number].indexOf(option);
                 records[number].splice(index, 1);
             }
+	     checkbox.addEventListener('blur', function() {
+    this.parentNode.classList.remove('focused');
+  });
         }
 
         function nextNumber() {
@@ -344,6 +347,14 @@ function downloadHTML() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+document.getElementById('number-search').addEventListener('focus', function() {
+  this.parentNode.classList.add('focused');
+});
+
+document.getElementById('number-search').addEventListener('blur', function() {
+  this.parentNode.classList.remove('focused');
+});
 
 
     </script>
