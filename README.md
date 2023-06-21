@@ -68,8 +68,8 @@
     </style>
 </head>
 <body>
-	   <div id="loadstate"> <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
-<button onclick="document.getElementById('loadState').click()">Load State</button></div>
+	   <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
+<button onclick="document.getElementById('loadState').click()">Load State</button>
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
@@ -221,6 +221,7 @@ var buttons = document.querySelectorAll('.button-group button');
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+   setTimeout(function(){
     var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
     var b = document.createElement('a');
     b.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(state);
@@ -229,6 +230,7 @@ var buttons = document.querySelectorAll('.button-group button');
     document.body.appendChild(b);
     b.click();
     document.body.removeChild(b);
+}, 1000); // 1 second delay
 }
 function loadState(event) {
     var file = event.target.files[0];
@@ -239,11 +241,23 @@ function loadState(event) {
         images = state.images;
         numbers = state.numbers;
         currentIndex = state.currentIndex;
+
+        // Empty the options div and recreate the options for each number
+        var optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = '';
+        options.forEach(option => {
+            var div = document.createElement('div');
+            div.className = 'option';
+            div.dataset.option = option;
+            div.onclick = toggleCheckbox;
+            div.innerHTML = `<input type="checkbox"> ${option}`;
+            optionsDiv.appendChild(div);
+        });
+
         setNumber();
     }
     reader.readAsText(file);
 }
-
 
 let drags = new Set() //set of all active drags
 document.addEventListener("touchmove", function(event){
