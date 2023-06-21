@@ -34,17 +34,24 @@
             background-color: #ddd;
         }
         .button-group {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-        }
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        background-color: #fff;
+        z-index: 1;
+        touch-action: none;
+    }
         .button-group button {
-            flex: 1;
-            border: none;
-            height: 75px;
-            font-size: 18px;
-        }
+        flex-grow: 1;
+        flex-basis: 0;
+        border: none;
+        height: 75px;
+        font-size: 18px;
+        touch-action: manipulation;
+    }
         .button-group button:first-child {
             background-color: lightblue;
             border-right: 1px solid black;
