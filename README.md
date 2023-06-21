@@ -208,7 +208,7 @@ var buttons = document.querySelectorAll('.button-group button');
 
         setNumber();
 		
-	function generateReport() {
+function generateReport() {
     var report = '<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
     for (var number in records) {
         var options = records[number].join(', ');
@@ -217,24 +217,30 @@ var buttons = document.querySelectorAll('.button-group button');
     }
     report += '</table></body></html>';
 
+ var reportBlob = new Blob([report], {type: 'text/html'});
+    var reportUrl = URL.createObjectURL(reportBlob);
     var a = document.createElement('a');
-    a.href = 'data:text/html;charset=utf-8,' + encodeURIComponent(report);
+    a.href = reportUrl;
     a.download = 'report.html';
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-   setTimeout(function(){
+    URL.revokeObjectURL(reportUrl);
+
     var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
+    var stateBlob = new Blob([state], {type: 'application/json'});
+    var stateUrl = URL.createObjectURL(stateBlob);
     var b = document.createElement('a');
-    b.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(state);
+    b.href = stateUrl;
     b.download = 'state.json';
     b.style.display = 'none';
     document.body.appendChild(b);
     b.click();
     document.body.removeChild(b);
-}, 1000); // 1 second delay
+    URL.revokeObjectURL(stateUrl);
 }
+
 function loadState(event) {
     var file = event.target.files[0];
     var reader = new FileReader();
