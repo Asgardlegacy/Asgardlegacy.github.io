@@ -68,6 +68,8 @@
     </style>
 </head>
 <body>
+	<button onclick="downloadJSON()">Download JSON</button>
+        <button onclick="downloadHTML()">Download HTML</button>
 	   <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
 <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
 
@@ -300,6 +302,49 @@ document.addEventListener('touchmove', function(event){
 })
 
 document.addEventListener("touchstart", function(e){e.preventDefault();},{passive: false});
+
+   function downloadJSON() {
+  var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
+  var blob = new Blob([state], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function downloadHTML() {
+  var report = '<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
+  for (var number in records) {
+    var options = records[number].join(', ');
+    var image = images[number] ? `<img src="${images[number]}" style="max-width: 100px; max-height: 100px"/>` : '';
+    report += `<tr><td>${number}</td><td>${options}</td><td>${image}</td></tr>`;
+  }
+  report += '</table></body></html>';
+
+  var blob = new Blob([report], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'report.html';
+  a.style.display = 'none';
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+
     </script>
 </body>
 </html>
