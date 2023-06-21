@@ -161,25 +161,25 @@
 <div id="options2" class="options-grid">
         <div class="option2">
             <label class="picture-upload">
-                <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)" />
+               <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 1)" />
                 Upload Picture
-                <img id="picture-preview-1" class="picture-preview" style="display: none;" onclick="handlePictureUpload(1)" />
+                <img id="picture-preview-1" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 1)" />
             </label>
         </div>
 
         <div class="option2">
             <label class="picture-upload">
-                <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)" />
+              <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 2)" />
                 Upload Picture
-                <img id="picture-preview-2" class="picture-preview" style="display: none;" onclick="handlePictureUpload(2)" />
+                <img id="picture-preview-2" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 2)" />
             </label>
         </div>
 
         <div class="option2">
             <label class="picture-upload">
-                <input type="file" id="picture-upload-3" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 3)" />
+                               <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 3)" />
                 Upload Picture
-                <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(3)" />
+                <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 3)" />
             </label>
         </div>
     </div>
@@ -222,21 +222,18 @@
         var currentIndex = 0;
         var pictureUploads = ['', '', ''];
 
-        function setNumber() {
-            var number = numbers[currentIndex];
-            document.getElementById("number").innerText = `Number: ${number}`;
-            document.getElementById("number-search").value = "";
-            var record = records[number] || [];
-            options.forEach((option) => {
-                var checkbox = document.querySelector(`#options .option[data-option="${option}"] input`);
-                checkbox.checked = record.includes(option);
-                checkbox.parentNode.classList.toggle("checked", checkbox.checked);
-            });
-            document.getElementById("photo").src = images[number] || "";
-            document.getElementById("photo").style.display = images[number] ? "block" : "none";
-            document.getElementById("generateReportButton").style.display =
-                currentIndex === numbers.length - 1 ? "block" : "none";
-        }
+       function setNumber() {
+    var number = numbers[currentIndex];
+    document.getElementById('number').innerText = `Number: ${number}`;
+    document.getElementById('number-search').value = '';
+    var record = records[number] || [];
+    options.forEach(option => {
+        var checkbox = document.querySelector(`#options .option[data-option="${option}"] input`);
+        checkbox.checked = record.includes(option);
+        checkbox.parentNode.classList.toggle('checked', checkbox.checked);
+    });
+    updatePicturePreview(number);
+}
 
         function toggleCheckbox(event) {
             var checkbox = event.target.tagName === "INPUT" ? event.target : event.target.querySelector("input");
@@ -432,21 +429,24 @@
       var uploadInput = document.getElementById(`picture-upload-${index}`);
       uploadInput.click();
     }
-
-    function handlePictureSelect(event, index) {
-      var uploadInput = event.target;
-      if (uploadInput.files && uploadInput.files[0]) {
-        var file = uploadInput.files[0];
-        var reader = new FileReader();
-        reader.onloadend = function() {
-          var picturePreview = document.getElementById(`picture-preview-${index}`);
-          picturePreview.src = reader.result;
-          picturePreview.style.display = 'block';
-          pictureUploads[index] = reader.result;
-        };
-        reader.readAsDataURL(file);
-      }
+    
+    function updatePicturePreview(number) {
+    for (let i = 1; i <= 3; i++) {
+        var preview = document.getElementById(`picture-preview-${i}`);
+        preview.src = images[`${number}-${i}`] || '';
+        preview.style.display = images[`${number}-${i}`] ? 'block' : 'none';
     }
+}
+
+    function handlePictureSelect(event, number, index) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        images[`${number}-${index}`] = reader.result;
+        updatePicturePreview(number);
+    };
+    reader.readAsDataURL(file);
+}
     
 
 
