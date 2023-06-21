@@ -1,4 +1,3 @@
-
 <html>
 <head>
 
@@ -63,12 +62,13 @@
             background-color: lightgreen;
 		touch-action: none; /* Prevent double click to zoom */
         }
+      
 
 	   touch-action: none; /* Prevent double click to zoom */
     </style>
 </head>
 <body>
-    <input type="number" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
+    <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)"/>
@@ -251,7 +251,7 @@ document.addEventListener('touchmove', function(event){
   if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
 })
 
-document.addEventListener("touchstart", function(e){e.preventDefault();},{passive: false});    
+document.addEventListener("touchstart", function(e){e.preventDefault();},{passive: false});
     </script>
 </body>
 </html>
