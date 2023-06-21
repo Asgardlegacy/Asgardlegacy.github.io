@@ -248,31 +248,33 @@ function generateReport() {
 }
 
 function loadState(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function() {
-        var state = JSON.parse(reader.result);
-        records = state.records;
-        images = state.images;
-        numbers = state.numbers;
-        currentIndex = state.currentIndex;
+  var file = event.target.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    var state = JSON.parse(reader.result);
+    records = state.records;
+    images = state.images;
+    numbers = state.numbers;
+    currentIndex = state.currentIndex;
 
-        // Empty the options div and recreate the options for each number
-        var optionsDiv = document.getElementById('options');
-        optionsDiv.innerHTML = '';
-        options.forEach(option => {
-            var div = document.createElement('div');
-            div.className = 'option';
-            div.dataset.option = option;
-            div.onclick = toggleCheckbox;
-            div.innerHTML = `<input type="checkbox"> ${option}`;
-            optionsDiv.appendChild(div);
-        });
+    // Empty the options div and recreate the options for each number
+    var optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    options.forEach(option => {
+      var div = document.createElement('div');
+      div.className = 'option';
+      div.dataset.option = option;
+      div.onclick = toggleCheckbox;
+      div.innerHTML = `<input type="checkbox"> ${option}`;
+      optionsDiv.appendChild(div);
+    });
 
-        setNumber();
-    }
-    reader.readAsText(file);
-    event.target.value = '';
+    setNumber();
+  };
+  reader.readAsText(file);
+
+  // Reset the value of the file input element
+  event.target.value = '';
 }
 
 let drags = new Set() //set of all active drags
@@ -323,6 +325,8 @@ document.addEventListener("touchstart", function(e){e.preventDefault();},{passiv
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  var event = new MouseEvent('click');
+  a.dispatchEvent(event);
 }
 
 function downloadHTML() {
@@ -347,6 +351,8 @@ function downloadHTML() {
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  var event = new MouseEvent('click');
+  a.dispatchEvent(event);
 }
 
 document.getElementById('number-search').addEventListener('focus', function() {
