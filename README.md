@@ -52,8 +52,7 @@
             text-align: center;
             cursor: pointer;
 		touch-action: none; /* Prevent double click to zoom */
-        }
-			
+        			
         }
         .button-group button:first-child {
             background-color: lightblue;
