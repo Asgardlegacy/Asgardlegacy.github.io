@@ -47,17 +47,20 @@
             border: none;
             height: 75px;
             font-size: 18px;
+		touch-action: none; /* Prevent double click to zoom */
 			
         }
         .button-group button:first-child {
             background-color: lightblue;
             border-right: 1px solid black;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group button:last-child {
             background-color: lightgreen;
+		touch-action: none; /* Prevent double click to zoom */
         }
 
-	    *{touch-action: pan-x pan-y} /*only allow scroll gestures*/
+	   touch-action: none; /* Prevent double click to zoom */
     </style>
 </head>
 <body>
