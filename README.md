@@ -23,6 +23,19 @@
             text-align: center;
             cursor: pointer;
         }
+ .option {
+          flex: 1 1 48%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin: 1px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 25px;
+          
+          
+        }
+        
         .option:nth-last-child(1):nth-child(odd),
         .option:nth-last-child(2):nth-child(odd) {
             flex: 0 0 100%;
