@@ -389,37 +389,40 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
-        function downloadHTML() {
-            var report =
-                '<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
-           var image = '';
-for (let i = 1; i <= 3; i++) {
-    var pictureKey = `${number}-${i}`;
-    if (images[pictureKey]) {
-        image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
-    }
-}
-report += `<tr><td>${number}</td><td>${options}</td><td>${image}</td></tr>`;
-            report += "</table></body></html>";
-
-            var blob = new Blob([report], { type: "text/html" });
-            var url = URL.createObjectURL(blob);
-
-            var a = document.createElement("a");
-            a.href = url;
-            a.download = "report.html";
-            a.style.display = "none";
-
-            document.body.appendChild(a);
-
-            var event = new MouseEvent("click");
-            a.dispatchEvent(event);
-
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+// start of html generation
+       function downloadHTML() {
+    var report =
+        '<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
+    for (var number in records) {
+        var options = records[number].join(", ");
+        var image = "";
+        for (let i = 1; i <= 3; i++) {
+            var pictureKey = `${number}-${i}`;
+            if (images[pictureKey]) {
+                image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
+            }
         }
+        report += `<tr><td>${number}</td><td>${options}</td><td>${image}</td></tr>`;
+    }
+    report += "</table></body></html>";
 
+    var blob = new Blob([report], { type: "text/html" });
+    var url = URL.createObjectURL(blob);
+
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "report.html";
+    a.style.display = "none";
+
+    document.body.appendChild(a);
+
+    var event = new MouseEvent("click");
+    a.dispatchEvent(event);
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+//end of html grneration
         document.getElementById("number-search").addEventListener("focus", function () {
             this.parentNode.classList.add("focused");
         });
