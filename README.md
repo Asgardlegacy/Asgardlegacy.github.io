@@ -38,8 +38,7 @@
 		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group {
-            position: -webkit-sticky; /* Safari */
-  position: sticky;
+            position: absolute;
             bottom: 0;
             width: 100%;
             display: flex;
