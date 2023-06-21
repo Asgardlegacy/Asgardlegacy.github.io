@@ -268,6 +268,7 @@ function loadState(event) {
         setNumber();
     }
     reader.readAsText(file);
+    event.target.value = '';
 }
 
 let drags = new Set() //set of all active drags
