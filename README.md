@@ -68,11 +68,12 @@
     </style>
 </head>
 <body>
+	   <div id="loadstate"> <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
+<button onclick="document.getElementById('loadState').click()">Load State</button></div>
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
-    <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
-<button onclick="document.getElementById('loadState').click()">Load State</button>
+
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)"/>
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px"/>
     <div class="button-group">
