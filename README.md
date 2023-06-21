@@ -14,18 +14,9 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-		touch-action: none; /* Prevent double click to zoom */
+		
         }
-        .option, .button-group button {
-            flex: 1 1 48%;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            margin: 2px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-		touch-action: none; /* Prevent double click to zoom */
-        }
+       
         .option:nth-last-child(1):nth-child(odd), .option:nth-last-child(2):nth-child(odd) {
             flex: 0 0 100%;
         }
@@ -51,6 +42,17 @@
             height: 75px;
             font-size: 18px;
 		touch-action: none; /* Prevent double click to zoom */
+
+   .option, .button-group button {
+            flex: 1 1 48%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin: 2px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+		touch-action: none; /* Prevent double click to zoom */
+        }
 			
         }
         .button-group button:first-child {
@@ -64,7 +66,7 @@
         }
       
 
-	   touch-action: none; /* Prevent double click to zoom */
+	  
     </style>
 </head>
 <body>
