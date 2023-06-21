@@ -8,6 +8,31 @@
             padding: 0;
             touch-action: none; /* Prevent double click to zoom */
         }
+         .top-button-group {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        padding: 1px;
+        border: 1px;
+        z-index: 1;
+        touch-action: none;
+    }
+
+    .top-button-group button {
+        flex-basis: 30.33%;
+        border: 1px solid black;
+       
+        height: 25px;
+        font-size: 14px;
+        touch-action: manipulation;
+        border-radius: 25px;
+    }
+
+        
         .options-grid {
             display: flex;
             flex-wrap: wrap;
@@ -80,10 +105,16 @@
     </style>
 </head>
 <body>
-    <button onclick="downloadJSON()">JSON</button>
-    <button onclick="downloadHTML()">HTML</button>
+   <div class="top-button-group">
+        <button onclick="downloadJSON()">JSON</button>
+        <button onclick="downloadHTML()">HTML</button>
+         <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
+    </div>
+    
+    
+    
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
-    <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
+    
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
