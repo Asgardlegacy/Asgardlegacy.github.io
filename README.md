@@ -8,6 +8,7 @@
             padding: 0;
             touch-action: none; /* Prevent double click to zoom */
         }
+        
          .top-button-group {
         position: fixed;
         top: 0;
@@ -26,12 +27,14 @@
         flex-basis: 30.33%;
         border: 1px solid black;
        
-        height: 25px;
+        height: 35px;
         font-size: 14px;
         touch-action: manipulation;
-        border-radius: 25px;
+        border-radius: 5px;
     }
-
+        
+        
+        
         
         .options-grid {
             display: flex;
@@ -48,7 +51,7 @@
             text-align: center;
             cursor: pointer;
         }
- .option {
+        .option {
           flex: 1 1 48%;
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -56,7 +59,7 @@
             padding: 10px;
             text-align: center;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 5px;
           
           
         }
@@ -102,16 +105,49 @@
         .focused {
             background-color: #f0f0f0;
         }
+        .picture-upload-block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .upload-block {
+    position: relative;
+    flex: 1;
+    margin-right: 10px;
+    border: 1px dashed #ccc;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .upload-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f7f7f7;
+  }
+
+  .upload-text {
+    font-size: 14px;
+  }
+
+  .picture-preview {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+  }
+
+        
     </style>
 </head>
 <body>
-   <div class="top-button-group">
+<div class="top-button-group">
         <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
-         <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
+        <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
     </div>
-    
-    
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
     
@@ -122,7 +158,38 @@
 
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
-    <div class="button-group">
+   //the start of it all
+   
+   <div id="picture-upload" class="picture-upload-block">
+  <div class="upload-block" onclick="handlePictureUpload(0)">
+    <input type="file" id="picture-upload-0" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 0)">
+    <div class="upload-placeholder">
+      <span class="upload-text">Upload Picture</span>
+    </div>
+    <img id="picture-preview-0" class="picture-preview" style="display: none">
+  </div>
+  <div class="upload-block" onclick="handlePictureUpload(1)">
+    <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)">
+    <div class="upload-placeholder">
+      <span class="upload-text">Upload Picture</span>
+    </div>
+    <img id="picture-preview-1" class="picture-preview" style="display: none">
+  </div>
+  <div class="upload-block" onclick="handlePictureUpload(2)">
+    <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)">
+    <div class="upload-placeholder">
+      <span class="upload-text">Upload Picture</span>
+    </div>
+    <img id="picture-preview-2" class="picture-preview" style="display: none">
+  </div>
+</div>
+
+   
+   
+ //the end of it all
+   
+   
+   <div class="button-group">
         
         <button onclick="previousNumber()">Previous</button>
         <button onclick="nextNumber()">Next</button>
@@ -156,6 +223,7 @@
         var records = {};
         var images = {};
         var currentIndex = 0;
+        var pictureUploads = ['', '', ''];
 
         function setNumber() {
             var number = numbers[currentIndex];
@@ -362,6 +430,27 @@
         document.getElementById("number-search").addEventListener("blur", function () {
             this.parentNode.classList.remove("focused");
         });
+        
+        function handlePictureUpload(index) {
+      var uploadInput = document.getElementById(`picture-upload-${index}`);
+      uploadInput.click();
+    }
+
+    function handlePictureSelect(event, index) {
+      var uploadInput = event.target;
+      if (uploadInput.files && uploadInput.files[0]) {
+        var file = uploadInput.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          var picturePreview = document.getElementById(`picture-preview-${index}`);
+          picturePreview.src = reader.result;
+          picturePreview.style.display = 'block';
+          pictureUploads[index] = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+        
     </script>
 </body>
 </html>
