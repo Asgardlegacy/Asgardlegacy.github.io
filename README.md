@@ -254,9 +254,7 @@
             if (currentIndex < numbers.length - 1) {
                 currentIndex = (currentIndex + 1) % numbers.length;
                 setNumber();
-            } else {
-                generateReport();
-            }
+            } 
         }
 
         function previousNumber() {
