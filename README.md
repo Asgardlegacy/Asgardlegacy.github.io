@@ -80,10 +80,10 @@
     </style>
 </head>
 <body>
-    <button onclick="downloadJSON()">Download JSON</button>
-    <button onclick="downloadHTML()">Download HTML</button>
+    <button onclick="downloadJSON()">JSON</button>
+    <button onclick="downloadHTML()">HTML</button>
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
-    <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
+    <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
