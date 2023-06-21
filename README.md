@@ -1,7 +1,6 @@
-
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
 
     <title>Number Manager</title>
     <style>
@@ -9,11 +8,13 @@
             font-family: Arial, sans-serif;
 			 margin: 0;
     padding: 0;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .options-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .option, .button-group button {
             flex: 1 1 48%;
@@ -23,41 +24,51 @@
             padding: 10px;
             text-align: center;
             cursor: pointer;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .option:nth-last-child(1):nth-child(odd), .option:nth-last-child(2):nth-child(odd) {
             flex: 0 0 100%;
         }
         .option input[type="checkbox"] {
             display: none;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .option.checked {
             background-color: #ddd;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group {
-            position: fixed;
+            position: -webkit-sticky; /* Safari */
+  position: sticky;
             bottom: 0;
             width: 100%;
             display: flex;
-			
+		touch-action: none; /* Prevent double click to zoom */	
         }
         .button-group button {
             flex: 1;
             border: none;
             height: 75px;
             font-size: 18px;
+		touch-action: none; /* Prevent double click to zoom */
 			
         }
         .button-group button:first-child {
             background-color: lightblue;
             border-right: 1px solid black;
+		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group button:last-child {
             background-color: lightgreen;
+		touch-action: none; /* Prevent double click to zoom */
         }
+      
+
+	   touch-action: none; /* Prevent double click to zoom */
     </style>
 </head>
 <body>
-    <input type="number" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
+    <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)"/>
@@ -68,7 +79,18 @@
         <button onclick="nextNumber()">Next</button>
     </div>
     <script>
-        var options = ["Vacant", "Locked", "Overlocked", "Red Lock Only", "No Lock", "Locked Open", "Needs Repair"];
+var doubleTouchStartTimestamp = 0;
+document.addEventListener("touchstart", function(event){
+    var now = +(new Date());
+    if (doubleTouchStartTimestamp + 500 > now){
+        event.preventDefault();
+    };
+    doubleTouchStartTimestamp = now;
+});
+	    
+	    
+	    
+	    var options = ["Vacant", "Locked", "Overlocked", "Red Lock Only", "No Lock", "Locked Open", "Needs Repair"];
         var numbers = [...Array(16).keys()].map(n => n + 101)
             .concat([...Array(14).keys()].map(n => n + 121))
             .concat([...Array(45).keys()].map(n => n + 201))
@@ -119,7 +141,7 @@
 }
 
 
-        function previousNumber() {
+      function previousNumber() {
             currentIndex = (currentIndex - 1 + numbers.length) % numbers.length;
             setNumber();
         }
@@ -131,9 +153,28 @@
                 if (searchIndex !== -1) {
                     currentIndex = searchIndex;
                     setNumber();
+			document.activeElement.blur();
                 }
             }
         }
+var buttons = document.querySelectorAll('.button-group button');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                this.focus();
+                this.blur();
+            });
+        });
+	    
+ var clickTimestamp = 0;
+        document.addEventListener('click', function(event) {
+            var now = new Date().getTime();
+            if (event.target.matches('button') && now - clickTimestamp < 300) {
+                event.preventDefault();
+            }
+            clickTimestamp = now;
+        });
+
+	    
 
         function handleFileSelect(event) {
             var file = event.target.files[0];
@@ -179,6 +220,38 @@
     document.body.removeChild(a);
 }
 
+let drags = new Set() //set of all active drags
+document.addEventListener("touchmove", function(event){
+  if(!event.isTrusted)return //don't react to fake touches
+  Array.from(event.changedTouches).forEach(function(touch){
+    drags.add(touch.identifier) //mark this touch as a drag
+  })
+})
+document.addEventListener("touchend", function(event){
+  if(!event.isTrusted)return
+  let isDrag = false
+  Array.from(event.changedTouches).forEach(function(touch){
+    if(drags.has(touch.identifier)){
+      isDrag = true
+    }
+    drags.delete(touch.identifier) //touch ended, so delete it
+  })
+  if(!isDrag && document.activeElement == document.body){
+    //note that double-tap only happens when the body is active
+    event.preventDefault() //don't zoom
+    event.stopPropagation() //don't relay event
+    event.target.focus() //in case it's an input element
+    event.target.click() //in case it has a click handler
+    event.target.dispatchEvent(new TouchEvent("touchend",event))
+    //dispatch a copy of this event (for other touch handlers)
+  }
+})
+
+document.addEventListener('touchmove', function(event){
+  if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
+})
+
+document.addEventListener("touchstart", function(e){e.preventDefault();},{passive: false});
     </script>
 </body>
 </html>
