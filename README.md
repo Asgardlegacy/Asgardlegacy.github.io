@@ -134,9 +134,10 @@
   }
 
   .picture-preview {
+    display: none;
     max-width: 100%;
-    max-height: 200px;
-    margin-top: 10px;
+    max-height: 100%;
+    object-fit: cover;
   }
 
         
