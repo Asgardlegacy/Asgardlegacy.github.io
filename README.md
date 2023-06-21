@@ -69,7 +69,8 @@
 </head>
 <body>
 	   <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
-<button onclick="document.getElementById('loadState').click()">Load State</button>
+<button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
+
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
@@ -180,15 +181,17 @@ var buttons = document.querySelectorAll('.button-group button');
 	    
 
         function handleFileSelect(event) {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-            reader.onloadend = function() {
-                images[numbers[currentIndex]] = reader.result;
-                document.getElementById('photo').src = reader.result;
-                document.getElementById('photo').style.display = 'block';
-            }
-            reader.readAsDataURL(file);
+    if (event.target.id === "file") {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            images[numbers[currentIndex]] = reader.result;
+            document.getElementById('photo').src = reader.result;
+            document.getElementById('photo').style.display = 'block';
         }
+        reader.readAsDataURL(file);
+    }
+}
 
         options.forEach(option => {
             var div = document.createElement('div');
