@@ -105,33 +105,40 @@
         .focused {
             background-color: #f0f0f0;
         }
-        .picture-upload-block {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
 
- .picture-upload-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-    }
-    .picture-upload-container .picture-upload {
-      flex: 0 0 30%;
-      border: 1px dashed #ccc;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .picture-upload-container .picture-upload:hover {
-      background-color: #f9f9f9;
-    }
-    .picture-preview {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-    }
-        
+        .picture-upload {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .picture-upload input[type="file"] {
+            display: none;
+        }
+
+        .picture-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+}
+  .option2 {
+          flex: 1 1 30%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            height: 200px;
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            }
     </style>
 </head>
 <body>
@@ -150,32 +157,33 @@
 
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
-   //the start of it all
 
-   <div class="picture-upload-container">
-    <div class="picture-upload" onclick="handlePictureUpload(0)">
-      <input type="file" id="picture-upload-0" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 0)" />
-      Upload Picture
-    </div>
-    <div class="picture-upload" onclick="handlePictureUpload(1)">
-      <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)" />
-      Upload Picture
-    </div>
-    <div class="picture-upload" onclick="handlePictureUpload(2)">
-      <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)" />
-      Upload Picture
-    </div>
-  </div>
+<div id="options2" class="options-grid">
+        <div class="option2">
+            <label class="picture-upload">
+                <input type="file" id="picture-upload-1" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 1)" />
+                Upload Picture
+                <img id="picture-preview-1" class="picture-preview" style="display: none;" onclick="handlePictureUpload(1)" />
+            </label>
+        </div>
 
-  <div id="picture-preview-container">
-    <img id="picture-preview-0" class="picture-preview" />
-    <img id="picture-preview-1" class="picture-preview" />
-    <img id="picture-preview-2" class="picture-preview" />
-  </div>
-  
-   
-   
- //the end of it all
+        <div class="option2">
+            <label class="picture-upload">
+                <input type="file" id="picture-upload-2" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 2)" />
+                Upload Picture
+                <img id="picture-preview-2" class="picture-preview" style="display: none;" onclick="handlePictureUpload(2)" />
+            </label>
+        </div>
+
+        <div class="option2">
+            <label class="picture-upload">
+                <input type="file" id="picture-upload-3" style="display: none" accept="image/*" onchange="handlePictureSelect(event, 3)" />
+                Upload Picture
+                <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(3)" />
+            </label>
+        </div>
+    </div>
+ 
    
    
    <div class="button-group">
@@ -439,7 +447,12 @@
         reader.readAsDataURL(file);
       }
     }
-        
+    
+
+
+ 
+ 
+ 
     </script>
 </body>
 </html>
