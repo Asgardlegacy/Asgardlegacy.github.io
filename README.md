@@ -38,7 +38,8 @@
 		touch-action: none; /* Prevent double click to zoom */
         }
         .button-group {
-            position: absolute;
+            position: -webkit-sticky; /* Safari */
+  position: sticky;
             bottom: 0;
             width: 100%;
             display: flex;
@@ -70,6 +71,8 @@
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
+    <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)"/>
+<button onclick="document.getElementById('loadState').click()">Load State</button>
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)"/>
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px"/>
     <div class="button-group">
@@ -217,7 +220,29 @@ var buttons = document.querySelectorAll('.button-group button');
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
+    var b = document.createElement('a');
+    b.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(state);
+    b.download = 'state.json';
+    b.style.display = 'none';
+    document.body.appendChild(b);
+    b.click();
+    document.body.removeChild(b);
 }
+function loadState(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        var state = JSON.parse(reader.result);
+        records = state.records;
+        images = state.images;
+        numbers = state.numbers;
+        currentIndex = state.currentIndex;
+        setNumber();
+    }
+    reader.readAsText(file);
+}
+
 
 let drags = new Set() //set of all active drags
 document.addEventListener("touchmove", function(event){
