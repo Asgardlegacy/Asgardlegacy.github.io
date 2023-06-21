@@ -310,7 +310,7 @@ document.addEventListener('touchmove', function(event){
 
 document.addEventListener("touchstart", function(e){e.preventDefault();},{passive: false});
 
-   function downloadJSON() {
+  function downloadJSON() {
   var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
   var blob = new Blob([state], { type: 'application/json' });
   var url = URL.createObjectURL(blob);
@@ -319,14 +319,14 @@ document.addEventListener("touchstart", function(e){e.preventDefault();},{passiv
   a.href = url;
   a.download = 'data.json';
   a.style.display = 'none';
+
   document.body.appendChild(a);
 
-  a.click();
+  var event = new MouseEvent('click');
+  a.dispatchEvent(event);
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  var event = new MouseEvent('click');
-  a.dispatchEvent(event);
 }
 
 function downloadHTML() {
@@ -345,15 +345,16 @@ function downloadHTML() {
   a.href = url;
   a.download = 'report.html';
   a.style.display = 'none';
+
   document.body.appendChild(a);
 
-  a.click();
+  var event = new MouseEvent('click');
+  a.dispatchEvent(event);
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  var event = new MouseEvent('click');
-  a.dispatchEvent(event);
 }
+
 
 document.getElementById('number-search').addEventListener('focus', function() {
   this.parentNode.classList.add('focused');
