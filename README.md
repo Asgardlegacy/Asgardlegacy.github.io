@@ -7,7 +7,11 @@
             margin: 0;
             padding: 0;
             touch-action: none; /* Prevent double click to zoom */
+            user-select: none;
         }
+        input {
+    user-select: auto;
+}
         
          .top-button-group {
         position: fixed;
