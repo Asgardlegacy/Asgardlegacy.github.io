@@ -590,7 +590,7 @@ function generateReport() {
     e.target.value = value;
 });
 document.addEventListener('touchstart', function(e){
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    if (e.target.tagName === 'INPUT') {
         e.preventDefault(); 
         e.target.focus();
         window.setTimeout(function () {
