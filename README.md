@@ -388,7 +388,7 @@
             });
             if (!isDrag && document.activeElement == document.body) {
                 //note that double-tap only happens when the body is active
-                //event.(); //don't zoom
+                event.(); //don't zoom
                 event.stopPropagation(); //don't relay event
                 event.target.focus(); //in case it's an input element
                 event.target.click(); //in case it has a click handler
