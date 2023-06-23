@@ -139,6 +139,13 @@
             cursor: pointer;
             border-radius: 5px;
             }
+            .notext{
+            user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera syntax */
+    -moz-user-select: none; /* Firefox syntax */
+    -ms-user-select: none; /* IE and Edge syntax */
+}
+            
     </style>
 </head>
 <body>
@@ -188,8 +195,8 @@
    
    <div class="button-group">
         
-        <button onclick="previousNumber()">Previous</button>
-        <button onclick="nextNumber()">Next</button>
+        <button class="notext" onclick="previousNumber()">Previous</button>
+        <button class="notext" onclick="nextNumber()">Next</button>
     </div>
     <script>
         var doubleTouchStartTimestamp = 0;
