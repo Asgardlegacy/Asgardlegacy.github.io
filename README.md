@@ -188,7 +188,7 @@
     
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search Unit..." />
-    <h1 id="Unit"></h1>
+    <h1 id="Number"></h1>
     <div id="options" class="options-grid"></div>
 
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
