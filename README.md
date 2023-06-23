@@ -396,11 +396,11 @@
                 //dispatch a copy of this event (for other touch handlers)
             }
         });
-
+/*
         document.addEventListener("touchmove", function (event) {
             if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
         });
-/*
+
         document.addEventListener("touchstart", function (e) {
             e.preventDefault();
         });
