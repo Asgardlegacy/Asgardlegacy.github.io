@@ -331,11 +331,11 @@
             div.innerHTML = `<input type="checkbox"> ${option}`;
             document.getElementById("options").appendChild(div);
         });
-
-        document.getElementById("number").onclick = function () {
+/*
+       document.getElementById("number").onclick = function () {
             document.getElementById("file").click();
         };
-
+*/
         setNumber();
 
        
