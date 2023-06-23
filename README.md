@@ -576,7 +576,16 @@ function generateReport() {
 }
 
   document.getElementById("file").addEventListener("change", handleFileSelect, false);
- 
+ document.getElementById('phoneNumber').addEventListener('input', function(e) {
+    var value = e.target.value.replace(/\D/g, ''); // remove non-digits
+    if (value.length >= 4) {
+        value = value.slice(0, 3) + '-' + value.slice(3);
+    }
+    if (value.length >= 8) {
+        value = value.slice(0, 7) + '-' + value.slice(7);
+    }
+    e.target.value = value;
+});
  
     </script>
 </body>
