@@ -481,15 +481,18 @@
     }
 }
 
-    function handlePictureSelect(event, number, index) {
+  function handlePictureSelect(event, number, index) {
     var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function() {
-        images[`${number}-${index}`] = reader.result;
-        updatePicturePreview(number);
-    };
-    reader.readAsDataURL(file);
+    compressImage(file, function(compressedFile) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            images[`${number}-${index}`] = reader.result;
+            updatePicturePreview(number);
+        };
+        reader.readAsDataURL(compressedFile);
+    });
 }
+
     
 function generateReport() {
     var report = '<html><head><style>table, th, td {border: 1px solid black;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
