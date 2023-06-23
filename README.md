@@ -147,29 +147,21 @@
 }
 
 #personalInfo {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px 0;
-    position: absolute;
+  position: absolute;
   left: 0;
   top: 20px;
-}
-
-.form-group {
-  
-    margin-bottom: 0px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0px;
-}
-
-.form-group input {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+#personalInfo input {
+    width: 48%; /* Slightly less than half to allow for some space between the inputs */
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
             
     </style>
@@ -183,13 +175,9 @@
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
-<form id="personalInfo">
-    <div class="form-group">
-        <input type="text" id="fullName" placeholder="First and Last Name" required />
-    </div>
-    <div class="form-group">
-        <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
-    </div>
+<form id="personalInfo" class="form-group">
+    <input type="text" id="fullName" placeholder="First and Last Name" required />
+    <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
 </form>
 
 
