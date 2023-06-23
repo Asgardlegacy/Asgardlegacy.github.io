@@ -6,7 +6,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            touch-action: manipulation; /* Prevent double click to zoom */
+            touch-action: none; /* Prevent double click to zoom */
         }
         
          .top-button-group {
@@ -20,7 +20,7 @@
         padding: 1px;
         border: 1px;
         z-index: 1;
-        touch-action: manipulation;
+        touch-action: none;
     }
 
     .top-button-group button {
@@ -84,7 +84,7 @@
         align-items: stretch;
         background-color: #fff;
         z-index: 1;
-        touch-action: manipulation;
+        touch-action: none;
     }
 
     .button-group button {
@@ -145,7 +145,7 @@
 <div class="top-button-group">
         <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
-        <button onclick="document.getElementById('loadState').click()" onstart="event.stopPropagation()">Load State</button>
+        <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
     </div>
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
@@ -192,13 +192,13 @@
         <button onclick="nextNumber()">Next</button>
     </div>
     <script>
-        var doubleStartTimestamp = 0;
-        document.addEventListener("start", function (event) {
+        var doubleTouchStartTimestamp = 0;
+        document.addEventListener("touchstart", function (event) {
             var now = Date.now();
-            if (doubleStartTimestamp + 500 > now) {
+            if (doubleTouchStartTimestamp + 500 > now) {
                 event.preventDefault();
             }
-            doubleStartTimestamp = now;
+            doubleTouchStartTimestamp = now;
         });
 
         var options = [
@@ -388,7 +388,7 @@
             });
             if (!isDrag && document.activeElement == document.body) {
                 //note that double-tap only happens when the body is active
-                event.(); //don't zoom
+                event.preventDefault(); //don't zoom
                 event.stopPropagation(); //don't relay event
                 event.target.focus(); //in case it's an input element
                 event.target.click(); //in case it has a click handler
@@ -400,11 +400,11 @@
         document.addEventListener("touchmove", function (event) {
             if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
         });
-
+/*
         document.addEventListener("touchstart", function (e) {
             e.preventDefault();
         });
-
+*/
         function downloadJSON() {
             var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
             var blob = new Blob([state], { type: "application/json" });
@@ -459,7 +459,7 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-//end of html grneration
+// end of html grneration
         document.getElementById("number-search").addEventListener("focus", function () {
             this.parentNode.classList.add("focused");
         });
