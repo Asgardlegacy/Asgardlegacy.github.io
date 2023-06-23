@@ -254,6 +254,7 @@
         var currentIndex = 0;
         var pictureUploads = ['', '', ''];
 
+var records = {};
        function setNumber() {
     var number = numbers[currentIndex];
     document.getElementById('number').innerText = `Number: ${number}`;
@@ -265,6 +266,17 @@
         checkbox.parentNode.classList.toggle('checked', checkbox.checked);
     });
     updatePicturePreview(number);
+    // test test test
+    var record = records[number] || {options: [], personalInfo: {fullName: "", phoneNumber: ""}};
+    options.forEach(option => {
+        // ...
+        var checkbox = document.querySelector(`#options .option[data-option="${option}"] input`);
+        checkbox.checked = record.options.includes(option);
+        checkbox.parentNode.classList.toggle('checked', checkbox.checked);
+    });
+     document.getElementById('fullName').value = record.personalInfo.fullName;
+    document.getElementById('phoneNumber').value = record.personalInfo.phoneNumber;
+
 }
 
         function toggleCheckbox(event) {
@@ -280,7 +292,24 @@
                 var index = records[number].indexOf(option);
                 records[number].splice(index, 1);
             }
+ records[number] = records[number] || {options: [], personalInfo: {fullName: "", phoneNumber: ""}};
+    if (checkbox.checked) {
+        records[number].options.push(option);
+    } else {
+        var index = records[number].options.indexOf(option);
+        records[number].options.splice(index, 1);
+    }
+            
         }
+document.getElementById('personalInfo').addEventListener('change', function() {
+    var fullName = document.getElementById('fullName').value;
+    var phoneNumber = document.getElementById('phoneNumber').value;
+
+    var number = numbers[currentIndex];
+    records[number] = records[number] || {options: [], personalInfo: {fullName: "", phoneNumber: ""}};
+    records[number].personalInfo = {fullName, phoneNumber};
+});
+
 
         function nextNumber() {
             
@@ -441,7 +470,7 @@
             var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
             var blob = new Blob([state], { type: "application/json" });
             var url = URL.createObjectURL(blob);
-
+var json = JSON.stringify(records);
             var a = document.createElement("a");
             a.href = url;
             a.download = "data.json";
@@ -464,6 +493,11 @@
         for (let i = 0; i < records[number].length; i++) {
             options += `<span class="option">${records[number][i]}</span>`;
         }
+        for (var number in records) {
+        var options = records[number].options.join(', ');
+        var personalInfo = records[number].personalInfo;
+        var fullName = personalInfo.fullName;
+        var phoneNumber = personalInfo.phoneNumber;
         var image = "";
         for (let i = 1; i <= 3; i++) {
             var pictureKey = `${number}-${i}`;
@@ -471,7 +505,7 @@
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
             }
         }
-        report += `<tr><td>${number}</td><td>${options}</td><td>${image}</td></tr>`;
+        report += `<tr><td>${number}</td><td>${options}</td><td>${fullName}</td><td>${phoneNumber}</td><td>${image}</td></tr>`;
     }
     report += "</table></body></html>";
 
