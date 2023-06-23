@@ -400,11 +400,11 @@
         document.addEventListener("touchmove", function (event) {
             if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
         });
-
+/*
         document.addEventListener("touchstart", function (e) {
             e.preventDefault();
         });
-
+*/
         function downloadJSON() {
             var state = JSON.stringify({ records: records, images: images, numbers: numbers, currentIndex: currentIndex });
             var blob = new Blob([state], { type: "application/json" });
