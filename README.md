@@ -145,6 +145,32 @@
     -moz-user-select: none; /* Firefox syntax */
     -ms-user-select: none; /* IE and Edge syntax */
 }
+
+#personalInfo {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+    position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+.form-group {
+  
+    margin-bottom: 0px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
             
     </style>
 </head>
@@ -156,6 +182,17 @@
     </div>
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
+
+<form id="personalInfo">
+    <div class="form-group">
+        <input type="text" id="fullName" placeholder="First and Last Name" required />
+    </div>
+    <div class="form-group">
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
+    </div>
+</form>
+
+
     
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search number..." />
