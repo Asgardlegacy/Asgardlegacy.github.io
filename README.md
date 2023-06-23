@@ -280,8 +280,8 @@
             var ctx = canvas.getContext("2d");
             img.src = URL.createObjectURL(file);
             img.onload = function () {
-                var MAX_WIDTH = 100;  // Adjust as needed
-                var MAX_HEIGHT = 100;  // Adjust as needed
+                var MAX_WIDTH = 400;  // Adjust as needed
+                var MAX_HEIGHT = 400;  // Adjust as needed
                 var width = img.width;
                 var height = img.height;
 
@@ -303,7 +303,7 @@
                 canvas.toBlob(function (blob) {
                     var newFile = new File([blob], file.name, {type: "image/jpeg", lastModified: Date.now()});
                     callback(newFile);
-                }, "image/jpeg", 0.65);
+                }, "image/jpeg", 0.75);
             };
         }
 
