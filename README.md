@@ -589,6 +589,26 @@ function generateReport() {
     }
     e.target.value = value;
 });
+document.addEventListener('touchstart', function(e){
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        e.preventDefault(); 
+        e.target.focus();
+        window.setTimeout(function () {
+            var sel, range;
+            if (window.getSelection && (sel = window.getSelection()).rangeCount) {
+                range = sel.getRangeAt(0);
+                range.collapse(true);
+                range.setEnd(e.target, e.target.value.length);
+                range.setStart(e.target, e.target.value.length);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            } else if (e.target.setSelectionRange) {
+                e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+            }
+        }, 1);
+    }
+});
+
  
     </script>
 </body>
