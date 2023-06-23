@@ -468,14 +468,17 @@ var json = JSON.stringify(records);
 // start of html generation
      function downloadHTML() {
     var report =
-        '<html><head><style>table, th, td {border: 1px solid black;} .option {border: 1px solid grey; padding: 5px; margin: 5px;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Image</th></tr>';
+        '<html><head><style>table, th, td {border: 1px solid black;} .option {border: 1px solid grey; padding: 5px; margin: 5px;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Name</th><th>Phone</th><th>Image</th></tr>';
     for (var number in records) {
         var options = records[number].options.join(', ');
         var personalInfo = records[number].personalInfo;
         var fullName = personalInfo.fullName;
         var phoneNumber = personalInfo.phoneNumber;
+         
+
+
         for (let i = 0; i < records[number].length; i++) {
-            options += `<span class="option">${records[number][i]}</span><td>${options}</td><td>${fullName}</td><td>${phoneNumber}</td></tr>`;
+            options += `<span class="option">${records[number][i]}</span>`;
         }
         
         var image = "";
