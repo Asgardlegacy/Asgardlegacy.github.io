@@ -264,7 +264,7 @@
         
        function setNumber() {
     var number = numbers[currentIndex];
-    document.getElementById('number').innerText = `Number: ${number}`;
+    document.getElementById('number').innerText = `Unit: ${number}`;
     document.getElementById('number-search').value = '';
    var record = records[number] || {options: [], personalInfo: {fullName: "", phoneNumber: ""}};
     options.forEach(option => {
