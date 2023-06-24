@@ -28,7 +28,7 @@
     }
 
     .top-button-group button {
-        flex-basis: 30.33%;
+        flex-basis: 20%;
         border: 1px solid black;
        
         height: 35px;
@@ -175,6 +175,7 @@
         <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
         <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
+   <button onclick="clearDataForNumber()">Clear Data</button>
     </div>
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
@@ -191,6 +192,9 @@
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
 
+   
+
+   
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
 
@@ -679,7 +683,31 @@ var db;
       }
     };
   }
- 
+ function clearData() {
+    // Clear pictures
+    let picArea = document.getElementById("picArea");
+    while (picArea.firstChild) {
+        picArea.firstChild.remove();
+    }
+
+    // Clear checkboxes
+    let checkboxesArea = document.getElementById("checkboxesArea");
+    while (checkboxesArea.firstChild) {
+        checkboxesArea.firstChild.remove();
+    }
+}
+function clearDataForNumber() {
+    // Clear data on screen
+    clearData();
+
+    // Clear data in numbers array
+    numbers[currentIndex].pictures = [];
+    numbers[currentIndex].checkboxes = [];
+
+    // Save state to IndexedDB
+    saveStateToIndexedDB();
+}
+
     </script>
 </body>
 </html>
