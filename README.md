@@ -293,12 +293,14 @@
             
                 currentIndex = (currentIndex + 1) % numbers.length;
                 setNumber();
+                saveStateToIndexedDB();  // Save state when the number changes
             } 
         
 
         function previousNumber() {
             currentIndex = (currentIndex - 1 + numbers.length) % numbers.length;
             setNumber();
+            saveStateToIndexedDB();  // Save state when the number changes
         }
 
         function searchNumber() {
@@ -509,6 +511,7 @@ var json = JSON.stringify(records);
 
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    saveStateToIndexedDB();  // Save state when the number changes
 }
 
 // end of html grneration
@@ -608,7 +611,74 @@ document.addEventListener('touchstart', function(e){
         }, 1);
     }
 });
+var db;
 
+  var request = indexedDB.open("storage", 1);
+
+  request.onerror = function(event) {
+    alert("Why didn't you allow my web app to use IndexedDB?!");
+  };
+
+  request.onsuccess = function(event) {
+    db = event.target.result;
+    loadStateFromIndexedDB();
+  };
+
+  request.onupgradeneeded = function(event) { 
+    var db = event.target.result;
+  
+    if (!db.objectStoreNames.contains('state')) {
+      var objectStore = db.createObjectStore('state', { keyPath: 'id' });
+    }
+  };
+
+  function saveStateToIndexedDB() {
+    var state = {
+      id: 1,
+      records: records,
+      images: images,
+      numbers: numbers,
+      currentIndex: currentIndex
+    };
+
+    var transaction = db.transaction(["state"], "readwrite");
+
+    transaction.oncomplete = function(event) {
+      console.log("All done!");
+    };
+
+    transaction.onerror = function(event) {
+      console.log("Error saving state to indexedDB:", event);
+    };
+
+    var objectStore = transaction.objectStore("state");
+    var request = objectStore.put(state);
+    request.onsuccess = function(event) {
+      console.log("State saved to indexedDB!");
+    };
+  }
+
+  function loadStateFromIndexedDB() {
+    var transaction = db.transaction(["state"]);
+    var objectStore = transaction.objectStore("state");
+    var request = objectStore.get(1);
+
+    request.onerror = function(event) {
+      console.log("Error loading state from indexedDB:", event);
+    };
+
+    request.onsuccess = function(event) {
+      if (request.result) {
+        records = request.result.records;
+        images = request.result.images;
+        numbers = request.result.numbers;
+        currentIndex = request.result.currentIndex;
+        setNumber();
+      } else {
+        console.log("No data record");
+      }
+    };
+  }
  
     </script>
 </body>
