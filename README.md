@@ -174,8 +174,8 @@
 <div class="top-button-group">
         <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
-        <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load State</button>
-   <button onclick="clearDataForNumber()">Clear Data</button>
+        <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
+   <button onclick="clearDataForNumber()">Clear</button>
     </div>
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
@@ -697,14 +697,19 @@ var db;
     }
 }
 function clearDataForNumber() {
-    // Clear data on screen
-    clearData();
+    const number = numbers[currentIndex];
+    if (!number) return;
+    
+    // Clear the data in the records and images objects
+    delete records[number];
+    for (let i = 1; i <= 3; i++) {
+        delete images[`${number}-${i}`];
+    }
+    
+    // Update the UI
+    setNumber();
 
-    // Clear data in numbers array
-    numbers[currentIndex].pictures = [];
-    numbers[currentIndex].checkboxes = [];
-
-    // Save state to IndexedDB
+    // Save the state to IndexedDB
     saveStateToIndexedDB();
 }
 
