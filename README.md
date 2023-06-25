@@ -194,7 +194,7 @@
     width: 100%;
     height: 100%;
     background: white;
-    z-index: -1;  /* Ensures the div is behind all other elements */
+     /* Ensures the div is behind all other elements */
 }
     </style>
 </head>
