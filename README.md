@@ -152,7 +152,7 @@
  .option3 {
           position:absolute;
             flex: 1 1 30%;
-          top:90px;
+          top:95px;
           right: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
@@ -246,7 +246,7 @@
             <label class="picture-upload">
                                <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
                 Upload Picture
-                <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
+                <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
             </label>
         </div>
        
