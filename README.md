@@ -198,6 +198,15 @@
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
 
+<div id="profile-pic-container" style="position: absolute; top: 0; right: 0; border: 1px solid black; padding: 5px;">
+    <h3>Profile</h3>
+    <img id="profile-pic-preview" style="max-width: 100px; max-height: 100px; display: none;"/>
+    <input id="profile-pic-upload" type="file" style="display: none;" accept="image/*" onchange="handleProfilePictureSelect(event)">
+    <button onclick="handleProfilePictureUpload()">Upload Profile Picture</button>
+</div>
+
+
+
 <div id="options2" class="options-grid">
         <div class="option2">
             <label class="picture-upload">
@@ -637,13 +646,15 @@ var db;
   };
 
   function saveStateToIndexedDB() {
-    var state = {
-      id: 1,
-      records: records,
-      images: images,
-      numbers: numbers,
-      currentIndex: currentIndex
+   var state = {
+        id: 1,
+        records: records,
+        images: images,
+        numbers: numbers,
+        currentIndex: currentIndex,
+        profilePicture: images['profile']
     };
+
 
     var transaction = db.transaction(["state"], "readwrite");
 
@@ -672,15 +683,19 @@ var db;
     };
 
     request.onsuccess = function(event) {
-      if (request.result) {
-        records = request.result.records;
-        images = request.result.images;
-        numbers = request.result.numbers;
-        currentIndex = request.result.currentIndex;
-        setNumber();
-      } else {
-        console.log("No data record");
-      }
+        if (request.result) {
+            records = request.result.records;
+            images = request.result.images;
+            numbers = request.result.numbers;
+            currentIndex = request.result.currentIndex;
+            setNumber();
+
+            // Load the profile picture URL from the state object
+            images['profile'] = request.result.profilePicture;
+            updateProfilePicturePreview();
+        } else {
+            console.log("No data record");
+        }
     };
   }
  function clearData() {
@@ -711,6 +726,30 @@ function clearDataForNumber() {
 
     // Save the state to IndexedDB
     saveStateToIndexedDB();
+}
+function handleProfilePictureUpload() {
+    var uploadInput = document.getElementById('profile-pic-upload');
+    uploadInput.click();
+}
+
+function handleProfilePictureSelect(event) {
+    var file = event.target.files[0];
+    compressImage(file, function(compressedFile) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            // Save the profile picture URL in the images object with key 'profile'
+            images['profile'] = reader.result;
+            updateProfilePicturePreview();
+            saveStateToIndexedDB();  // Save state when the profile picture changes
+        };
+        reader.readAsDataURL(compressedFile);
+    });
+}
+
+function updateProfilePicturePreview() {
+    var preview = document.getElementById('profile-pic-preview');
+    preview.src = images['profile'] || '';
+    preview.style.display = images['profile'] ? 'block' : 'none';
 }
 
     </script>
