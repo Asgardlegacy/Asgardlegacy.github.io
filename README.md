@@ -149,7 +149,26 @@
     -moz-user-select: none; /* Firefox syntax */
     -ms-user-select: none; /* IE and Edge syntax */
 }
-
+  .option3 {
+  position: absolute;
+  right: 10px;
+  top: 80px;
+          flex: 1 1 30%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            height: 100px;
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            }
+            .notext{
+            user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera syntax */
+    -moz-user-select: none; /* Firefox syntax */
+    -ms-user-select: none; /* IE and Edge syntax */
+}
 #personalInfo {
   position: absolute;
   left: 0;
@@ -168,6 +187,50 @@
     border-radius: 4px;
 }
             
+            
+            #profile-pic-area {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    overflow: hidden; /* This ensures the picture doesn't overflow the box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-pic-preview {
+    width: 100%;
+    height: 100%;
+    position: relative; /* Position relative so that the img position absolute can work */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-pic-preview img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%, -50%);
+}
+
+.profile-pic-label {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
     </style>
 </head>
 <body>
@@ -186,7 +249,7 @@
 </form>
 
 
-    
+    <br>  <br>  <br>  <br>  <br>
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search Unit..." />
     <h1 id="number"></h1>
@@ -198,12 +261,10 @@
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
 
-<div id="profile-pic-container" style="position: absolute; top: 0; right: 0; border: 1px solid black; padding: 5px;">
-    <h3>Profile</h3>
-    <img id="profile-pic-preview" style="max-width: 100px; max-height: 100px; display: none;"/>
-    <input id="profile-pic-upload" type="file" style="display: none;" accept="image/*" onchange="handleProfilePictureSelect(event)">
-    <button onclick="handleProfilePictureUpload()">Upload Profile Picture</button>
-</div>
+
+
+
+
 
 
 
@@ -229,6 +290,13 @@
                                <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 3)" />
                 Upload Picture
                 <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 3)" />
+            </label>
+        </div>
+        <div class="option3">
+            <label class="picture-upload">
+                               <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
+                Upload Picture
+                <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
             </label>
         </div>
     </div>
@@ -284,6 +352,7 @@
     updatePicturePreview(number);
      document.getElementById('fullName').value = record.personalInfo.fullName;
     document.getElementById('phoneNumber').value = record.personalInfo.phoneNumber;
+    updateProfilePicturePreview(numbers[currentIndex]);  // Add this line
 
 }
 
@@ -499,7 +568,7 @@ var json = JSON.stringify(records);
         }
         
         var image = "";
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
             var pictureKey = `${number}-${i}`;
             if (images[pictureKey]) {
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
@@ -542,7 +611,7 @@ var json = JSON.stringify(records);
     }
     
     function updatePicturePreview(number) {
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
         var preview = document.getElementById(`picture-preview-${i}`);
         preview.src = images[`${number}-${i}`] || '';
         preview.style.display = images[`${number}-${i}`] ? 'block' : 'none';
@@ -726,30 +795,6 @@ function clearDataForNumber() {
 
     // Save the state to IndexedDB
     saveStateToIndexedDB();
-}
-function handleProfilePictureUpload() {
-    var uploadInput = document.getElementById('profile-pic-upload');
-    uploadInput.click();
-}
-
-function handleProfilePictureSelect(event) {
-    var file = event.target.files[0];
-    compressImage(file, function(compressedFile) {
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            // Save the profile picture URL in the images object with key 'profile'
-            images['profile'] = reader.result;
-            updateProfilePicturePreview();
-            saveStateToIndexedDB();  // Save state when the profile picture changes
-        };
-        reader.readAsDataURL(compressedFile);
-    });
-}
-
-function updateProfilePicturePreview() {
-    var preview = document.getElementById('profile-pic-preview');
-    preview.src = images['profile'] || '';
-    preview.style.display = images['profile'] ? 'block' : 'none';
 }
 
     </script>
