@@ -131,6 +131,7 @@
             object-fit: cover;
             max-width: 100%;
             max-height: 100%;
+            border-radius: 5px;
 }
   .option2 {
           flex: 1 1 30%;
