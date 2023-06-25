@@ -150,9 +150,10 @@
     -ms-user-select: none; /* IE and Edge syntax */
 }
  .option3 {
-          position:absolute
-          top:90px
-          right 10px;
+          position:absolute;
+            flex: 1 1 30%;
+          top:90px;
+          right: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             height: 100px;
@@ -240,16 +241,19 @@
                 <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 3)" />
             </label>
         </div>
-         <div class="option3">
+       
+        <div class="option3">
             <label class="picture-upload">
                                <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
                 Upload Picture
-                <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
+                <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
             </label>
         </div>
+       
     </div>
+
  
-   
+ 
    
    <div class="button-group">
         
