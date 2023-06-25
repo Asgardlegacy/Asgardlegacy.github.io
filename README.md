@@ -187,10 +187,20 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-            
+            #background-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: -1;  /* Ensures the div is behind all other elements */
+}
     </style>
 </head>
 <body>
+ <div id="background-box"></div>
+    
 <div class="top-button-group">
         <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
