@@ -149,26 +149,7 @@
     -moz-user-select: none; /* Firefox syntax */
     -ms-user-select: none; /* IE and Edge syntax */
 }
-  .option3 {
-  position: absolute;
-  right: 10px;
-  top: 80px;
-          flex: 1 1 30%;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            height: 100px;
-            margin: 0px;
-            padding: 0px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 5px;
-            }
-            .notext{
-            user-select: none; /* standard syntax */
-    -webkit-user-select: none; /* Chrome, Safari, and Opera syntax */
-    -moz-user-select: none; /* Firefox syntax */
-    -ms-user-select: none; /* IE and Edge syntax */
-}
+
 #personalInfo {
   position: absolute;
   left: 0;
@@ -187,50 +168,6 @@
     border-radius: 4px;
 }
             
-            
-            #profile-pic-area {
-    position: absolute;
-    top: 80px;
-    right: 10px;
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-    overflow: hidden; /* This ensures the picture doesn't overflow the box */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#profile-pic-preview {
-    width: 100%;
-    height: 100%;
-    position: relative; /* Position relative so that the img position absolute can work */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#profile-pic-preview img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 100%;
-    width: auto;
-    transform: translate(-50%, -50%);
-}
-
-.profile-pic-label {
-    position: absolute;
-    top: 0px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.7);
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
     </style>
 </head>
 <body>
@@ -249,7 +186,7 @@
 </form>
 
 
-    <br>  <br>  <br>  <br>  <br>
+    
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search Unit..." />
     <h1 id="number"></h1>
@@ -260,13 +197,6 @@
    
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
     <img id="photo" style="display: none; max-width: 200px; max-height: 200px; margin-bottom: 10px" />
-
-
-
-
-
-
-
 
 <div id="options2" class="options-grid">
         <div class="option2">
@@ -290,13 +220,6 @@
                                <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 3)" />
                 Upload Picture
                 <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 3)" />
-            </label>
-        </div>
-        <div class="option3">
-            <label class="picture-upload">
-                               <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
-                Upload Picture
-                <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
             </label>
         </div>
     </div>
@@ -352,7 +275,6 @@
     updatePicturePreview(number);
      document.getElementById('fullName').value = record.personalInfo.fullName;
     document.getElementById('phoneNumber').value = record.personalInfo.phoneNumber;
-    updateProfilePicturePreview(numbers[currentIndex]);  // Add this line
 
 }
 
@@ -568,7 +490,7 @@ var json = JSON.stringify(records);
         }
         
         var image = "";
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 3; i++) {
             var pictureKey = `${number}-${i}`;
             if (images[pictureKey]) {
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
@@ -611,7 +533,7 @@ var json = JSON.stringify(records);
     }
     
     function updatePicturePreview(number) {
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 3; i++) {
         var preview = document.getElementById(`picture-preview-${i}`);
         preview.src = images[`${number}-${i}`] || '';
         preview.style.display = images[`${number}-${i}`] ? 'block' : 'none';
@@ -715,15 +637,13 @@ var db;
   };
 
   function saveStateToIndexedDB() {
-   var state = {
-        id: 1,
-        records: records,
-        images: images,
-        numbers: numbers,
-        currentIndex: currentIndex,
-        profilePicture: images['profile']
+    var state = {
+      id: 1,
+      records: records,
+      images: images,
+      numbers: numbers,
+      currentIndex: currentIndex
     };
-
 
     var transaction = db.transaction(["state"], "readwrite");
 
@@ -752,19 +672,15 @@ var db;
     };
 
     request.onsuccess = function(event) {
-        if (request.result) {
-            records = request.result.records;
-            images = request.result.images;
-            numbers = request.result.numbers;
-            currentIndex = request.result.currentIndex;
-            setNumber();
-
-            // Load the profile picture URL from the state object
-            images['profile'] = request.result.profilePicture;
-            updateProfilePicturePreview();
-        } else {
-            console.log("No data record");
-        }
+      if (request.result) {
+        records = request.result.records;
+        images = request.result.images;
+        numbers = request.result.numbers;
+        currentIndex = request.result.currentIndex;
+        setNumber();
+      } else {
+        console.log("No data record");
+      }
     };
   }
  function clearData() {
