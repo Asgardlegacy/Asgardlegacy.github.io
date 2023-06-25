@@ -149,7 +149,25 @@
     -moz-user-select: none; /* Firefox syntax */
     -ms-user-select: none; /* IE and Edge syntax */
 }
-
+ .option3 {
+          position:absolute
+          top:90px
+          right 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            height: 100px;
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            }
+            .notext{
+            user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera syntax */
+    -moz-user-select: none; /* Firefox syntax */
+    -ms-user-select: none; /* IE and Edge syntax */
+}
 #personalInfo {
   position: absolute;
   left: 0;
@@ -220,6 +238,13 @@
                                <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 3)" />
                 Upload Picture
                 <img id="picture-preview-3" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 3)" />
+            </label>
+        </div>
+         <div class="option3">
+            <label class="picture-upload">
+                               <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
+                Upload Picture
+                <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
             </label>
         </div>
     </div>
@@ -490,7 +515,7 @@ var json = JSON.stringify(records);
         }
         
         var image = "";
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
             var pictureKey = `${number}-${i}`;
             if (images[pictureKey]) {
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
@@ -533,7 +558,7 @@ var json = JSON.stringify(records);
     }
     
     function updatePicturePreview(number) {
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
         var preview = document.getElementById(`picture-preview-${i}`);
         preview.src = images[`${number}-${i}`] || '';
         preview.style.display = images[`${number}-${i}`] ? 'block' : 'none';
@@ -558,7 +583,7 @@ function generateReport() {
     for (var number in records) {
         var options = records[number].join(', ');
         var image = '';
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
             var pictureKey = `${number}-${i}`;
             if (images[pictureKey]) {
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
@@ -702,7 +727,7 @@ function clearDataForNumber() {
     
     // Clear the data in the records and images objects
     delete records[number];
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 4; i++) {
         delete images[`${number}-${i}`];
     }
     
