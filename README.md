@@ -192,7 +192,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100px;
     background: white;
      /* Ensures the div is behind all other elements */
 }
