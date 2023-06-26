@@ -68,10 +68,7 @@
           
         }
         
-        .option:nth-last-child(1):nth-child(odd),
-        .option:nth-last-child(2):nth-child(odd) {
-            flex: 0 0 100%;
-        }
+        
         .option input[type="checkbox"] {
             display: none;
         }
@@ -222,7 +219,10 @@
     <h1 id="number"></h1>
     <div id="options" class="options-grid"></div>
 
-   
+   <div id="commentArea">
+    <label for="comment">Comment:</label><br>
+    <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+</div>
 
    
     <input type="file" id="file" style="display: none" accept="image/*" onchange="handleFileSelect(event)" />
@@ -281,15 +281,8 @@
             doubleTouchStartTimestamp = now;
         });
 
-        var options = [
-            "Vacant",
-            "Locked",
-            "Overlocked",
-            "Red Lock Only",
-            "No Lock",
-            "Locked Open",
-            "Needs Repair",
-        ];
+        var options = ["Locked", "Vacant", "Overlocked", "No Lock", "Locked Open", "Needs Repair"];
+        
         var numbers = [
             ...Array(16).keys()].map(n => n + 101)
             .concat([...Array(14).keys()].map(n => n + 121))
@@ -312,6 +305,8 @@
         checkbox.checked = record.options.includes(option);
         checkbox.parentNode.classList.toggle('checked', checkbox.checked);
     });
+    var commentBox = document.getElementById("comment");
+    commentBox.value = records[number] ? records[number].comment : '';
     updatePicturePreview(number);
      document.getElementById('fullName').value = record.personalInfo.fullName;
     document.getElementById('phoneNumber').value = record.personalInfo.phoneNumber;
@@ -518,11 +513,12 @@ var json = JSON.stringify(records);
 // start of html generation
    function downloadHTML() {
     var report =
-        '<html><head><style>table, th, td {border: 1px solid black;} .option {border: 1px solid red; padding: 5px; margin: 5px;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Name</th><th>Phone</th><th>Image</th></tr>';
+        '<html><head><style>table, th, td {border: 1px solid black;} .option {border: 1px solid red; padding: 5px; margin: 5px;}</style></head><body><table><tr><th>Number</th><th>Options</th><th>Name</th><th>Phone</th><th>Image</th><th>Comment</th></tr>';
     for (var number in records) {
         var personalInfo = records[number].personalInfo;
         var fullName = personalInfo.fullName;
         var phoneNumber = personalInfo.phoneNumber;
+        var comment = records[number].comment;
          
         var options = '';
         for (let i = 0; i < records[number].options.length; i++) {
@@ -536,7 +532,7 @@ var json = JSON.stringify(records);
                 image += `<img src="${images[pictureKey]}" style="max-width: 100px; max-height: 100px"/>`;
             }
         }
-        report += `<tr><td>${number}</td><td>${options}</td><td>${fullName}</td><td>${phoneNumber}</td><td>${image}</td></tr>`;
+        report += `<tr><td>${number}</td><td>${options}</td><td>${fullName}</td><td>${phoneNumber}</td><td>${image}</td><td>${comment}</td></tr>`;
     }
     report += "</table></body></html>";
 
@@ -752,7 +748,17 @@ function clearDataForNumber() {
     // Save the state to IndexedDB
     saveStateToIndexedDB();
 }
-
+function handleCommentChange(event, number) {
+    var comment = event.target.value;
+    if (!records[number]) {
+        records[number] = { options: [], personalInfo: {}, comment: '' };
+    }
+    records[number].comment = comment;
+    saveStateToIndexedDB();
+}
+document.getElementById('comment').addEventListener('input', function(e) {
+    handleCommentChange(e, numbers[currentIndex]);
+});
     </script>
 </body>
 </html>
