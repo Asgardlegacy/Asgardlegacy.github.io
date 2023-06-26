@@ -193,6 +193,15 @@
     background: white;
      /* Ensures the div is behind all other elements */
 }
+
+#comment {
+    width: 100%; /* adjust this to match the total width of checkboxes */
+    height:35px;
+    padding: 1px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
     </style>
 </head>
 <body>
@@ -220,8 +229,9 @@
     <div id="options" class="options-grid"></div>
 
    <div id="commentArea">
-    <label for="comment">Comment:</label><br>
-    <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+  
+    <label for="comment"></label><br>
+    <input id="comment" name="comment" placeholder="Comment...">
 </div>
 
    
