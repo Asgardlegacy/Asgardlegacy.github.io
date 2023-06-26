@@ -44,6 +44,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            padding: 10px 0 10px 0;;
         }
         .option,
         .button-group button {
