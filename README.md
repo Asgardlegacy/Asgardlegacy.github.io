@@ -642,8 +642,8 @@ function generateReport() {
     e.target.value = value;
 });
 document.addEventListener('touchstart', function(e){
-    if (e.target.tagName === 'INPUT' && e.target.id !== 'commentArea') {
-        e.preventDefault(); 
+    if (e.target.tagName === 'INPUT' && e.target.type !== 'textarea') {
+        e.preventDefault();
         e.target.focus();
         window.setTimeout(function () {
             var sel, range;
