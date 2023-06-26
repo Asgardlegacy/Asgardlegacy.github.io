@@ -467,7 +467,7 @@ document.getElementById('personalInfo').addEventListener('change', function() {
         }
 
         let drags = new Set(); //set of all active drags
-        document.addEventListener("touchmove", function (event) {
+/*        document.addEventListener("touchmove", function (event) {
             if (!event.isTrusted) return; //don't react to fake touches
             Array.from(event.changedTouches).forEach(function (touch) {
                 drags.add(touch.identifier); //mark this touch as a drag
@@ -492,7 +492,7 @@ document.getElementById('personalInfo').addEventListener('change', function() {
                 //dispatch a copy of this event (for other touch handlers)
             }
         });
-
+*/
         document.addEventListener("touchmove", function (event) {
             if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
         });
