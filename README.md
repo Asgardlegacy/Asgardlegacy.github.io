@@ -200,8 +200,6 @@
     padding: 1px;
     box-sizing: border-box;
     border-radius: 5px;
-  
-}
 
     </style>
 </head>
@@ -232,7 +230,7 @@
    <div id="commentArea">
   
     <label for="comment"></label><br>
-    <input id="comment" name="comment" placeholder="Comment...">
+    <input type="text" id="comment" name="comment" placeholder="Comment...">
 </div>
 
    
@@ -644,7 +642,7 @@ function generateReport() {
     e.target.value = value;
 });
 document.addEventListener('touchstart', function(e){
-    if (e.target.tagName === 'INPUT' && e.target.parentNode.tagName !== 'BUTTON') {
+    if (e.target.tagName === 'INPUT') {
         e.preventDefault(); 
         e.target.focus();
         window.setTimeout(function () {
