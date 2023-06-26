@@ -200,6 +200,7 @@
     padding: 1px;
     box-sizing: border-box;
     border-radius: 5px;
+  
 }
 
     </style>
@@ -643,7 +644,7 @@ function generateReport() {
     e.target.value = value;
 });
 document.addEventListener('touchstart', function(e){
-    if (e.target.tagName === 'INPUT') {
+    if (e.target.tagName === 'INPUT' && e.target.parentNode.tagName !== 'BUTTON') {
         e.preventDefault(); 
         e.target.focus();
         window.setTimeout(function () {
