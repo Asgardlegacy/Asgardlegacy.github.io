@@ -642,7 +642,7 @@ function generateReport() {
     e.target.value = value;
 });
 document.addEventListener('touchstart', function(e){
-    if (e.target.tagName === 'INPUT') {
+    if (e.target.tagName === 'INPUT' && e.target.id !== 'commentArea') {
         e.preventDefault(); 
         e.target.focus();
         window.setTimeout(function () {
@@ -660,6 +660,7 @@ document.addEventListener('touchstart', function(e){
         }, 1);
     }
 });
+
 var db;
 
   var request = indexedDB.open("storage", 1);
