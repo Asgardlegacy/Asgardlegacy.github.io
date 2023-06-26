@@ -24,7 +24,7 @@
         padding: 1px;
         border: 1px;
         z-index: 1;
-        touch-action: none;
+        -action: none;
     }
 
     .top-button-group button {
@@ -284,7 +284,7 @@
         <button class="notext" onclick="nextNumber()">Next</button>
     </div>
     <script>
-        var doubleTouchStartTimestamp = 0;
+/*        var doubleTouchStartTimestamp = 0;
         document.addEventListener("touchstart", function (event) {
             var now = Date.now();
             if (doubleTouchStartTimestamp + 500 > now) {
@@ -292,7 +292,7 @@
             }
             doubleTouchStartTimestamp = now;
         });
-
+*/
         var options = ["Locked", "Vacant", "Overlocked", "No Lock", "Locked Open", "Needs Repair"];
         
         var numbers = [
@@ -496,9 +496,10 @@ document.getElementById('personalInfo').addEventListener('change', function() {
             }
         });
 */
-        document.addEventListener("touchmove", function (event) {
+ /*       document.addEventListener("touchmove", function (event) {
             if (event.scale !== 1) event.preventDefault(); //if a scale gesture, don't
         });
+*/        
 /*
         document.addEventListener("touchstart", function (e) {
             e.preventDefault();
@@ -644,6 +645,7 @@ function generateReport() {
     }
     e.target.value = value;
 });
+/*
 document.addEventListener('touchstart', function(e){
     if (e.target.tagName === 'INPUT' && e.target.type !== 'textarea') {
         e.preventDefault();
@@ -663,7 +665,7 @@ document.addEventListener('touchstart', function(e){
         }, 1);
     }
 });
-
+*/
 var db;
 
   var request = indexedDB.open("storage", 1);
