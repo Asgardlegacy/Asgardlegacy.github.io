@@ -373,9 +373,7 @@
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
 
-    <br><br><br>
-
-<div>
+    
 
 
 
@@ -384,13 +382,13 @@
       <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
     </form>
 
-</div>
+
 
 
 
     <div id="menu" class="menu-hidden">
       <button id="close-menu-button" onclick="closeMenu()">Close</button>
-    /*  <br><br><br><br><br><br> */
+   
       <div class="array-settings">
         <div class="array-settings">
           <div id="array-ranges">
