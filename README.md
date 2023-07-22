@@ -8,10 +8,11 @@
             padding: 0;
             touch-action: none; /* Prevent double click to zoom */
             user-select: none;
-        }
+     background-color: white;
+     }
         input {
     user-select: auto;
-}
+    }
         
          .top-button-group {
         position: fixed;
@@ -20,24 +21,43 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
-        background-color: #fff;
+        
         padding: 1px;
         border: 1px;
         z-index: 1;
         -action: none;
+       background-color: #7892c2;
+    
+    font-size: 24px;
+    
+    cursor: pointer;
     }
 
     .top-button-group button {
         flex-basis: 20%;
-        border: 1px solid black;
-       
-        height: 35px;
-        font-size: 14px;
-        touch-action: manipulation;
-        border-radius: 5px;
+        
+	background-color:#7892c2;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	padding:7px 5px;
+	text-decoration:none;
+	text-shadow:3px 3px 1px #283966;
+    cursor: pointer;
+    
     }
-        
-        
+       
+       .top-button-group button:hover{
+        background-color:#476e9e;
+        }
+        .top-button-group button:active{
+        	position:relative;
+	top:1px;
+}
         
         
         .options-grid {
@@ -65,13 +85,14 @@
             text-align: center;
             cursor: pointer;
             border-radius: 5px;
-          
+          background-color:white;
           
         }
         
         
         .option input[type="checkbox"] {
             display: none;
+            background-color:white;
         }
         .option.checked {
             background-color: #ddd;
@@ -97,13 +118,34 @@
         font-size: 18px;
         touch-action: manipulation;
     }
+        
+        
+ 
+        
+        
         .button-group button:first-child {
-            background-color: lightblue;
+            background-color: #7892c2;
+            color:white;
             border-right: 1px solid black;
+            text-shadow:3px 3px 1px #283966;
         }
+                
         .button-group button:last-child {
-            background-color: lightgreen;
+             background-color: #7892c2;
+            color:white;
+            text-shadow:3px 3px 1px #283966;
         }
+        
+           .button-group button:hover {
+      
+      background-color:#476e9e;
+    }    
+     .button-group button:active {
+    position:relative;
+    top:1px;
+}   
+        
+        
         .focused {
             background-color: #f0f0f0;
         }
@@ -141,6 +183,7 @@
             text-align: center;
             cursor: pointer;
             border-radius: 5px;
+            background-color:white;
             }
             .notext{
             user-select: none; /* standard syntax */
@@ -161,6 +204,7 @@
             text-align: center;
             cursor: pointer;
             border-radius: 5px;
+            background-color:white;
             }
             .notext{
             user-select: none; /* standard syntax */
@@ -201,6 +245,84 @@
     padding: 1px;
     box-sizing: border-box;
     border-radius: 5px;
+}
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+#menu input[type='text'] {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.menu-hidden {
+    transform: translateX(-100%);
+}
+
+.menu-visible {
+    transform: translateX(0);
+}
+
+#close-menu-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    color: white;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+#update-numbers-button {
+   position: absolute;
+    left: 0;
+   top: 50px;
+    width: 100%;
+    height: 50px;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.range-input {
+    width: 100%;
+}
+
+.clear-button {
+    position: absolute;
+    top: 0;
+    right: -8px;
+    width: 50px;
+    height: 100%;
+    border: 1px solid black;
+    background: lightgray;
+    cursor: pointer;
+}
+.clear-button:active;{
+   position:relative;
+    top:1px;
+  
+}
 
     </style>
 </head>
@@ -208,7 +330,8 @@
  <div id="background-box"></div>
     
 <div class="top-button-group">
-        <button onclick="downloadJSON()">JSON</button>
+       <button id="menu-button" onclick="toggleMenu()">Menu</button>
+       <button onclick="downloadJSON()">JSON</button>
         <button onclick="downloadHTML()">HTML</button>
         <button onclick="document.getElementById('loadState').click()" ontouchstart="event.stopPropagation()">Load</button>
    <button onclick="clearDataForNumber()">Clear</button>
@@ -220,6 +343,22 @@
     <input type="text" id="fullName" placeholder="First and Last Name" required />
     <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
 </form>
+<br><br><br><br><br>
+
+
+<div id="menu" class="menu-hidden">
+<button id="close-menu-button" onclick="closeMenu()">Close</button>
+<br><br><br><br><br><br>
+    <div class="array-settings">
+<div class="array-settings">
+    <div id="array-ranges">
+        <!-- Range inputs will be added here -->
+    </div>
+    <button onclick="addRangeInput()">Add Range</button>
+    <button onclick="removeRangeInput()">Remove Range</button>
+    <button id="update-numbers-button" onclick="updateNumbers()">Update Numbers</button>
+
+    </div></div></div>
 
 
     
@@ -296,13 +435,8 @@
 */
         var options = ["Locked", "Vacant", "Overlocked", "No Lock", "Locked Open", "Needs Repair"];
         
-        var numbers = [
-            ...Array(16).keys()].map(n => n + 101)
-            .concat([...Array(14).keys()].map(n => n + 121))
-            .concat([...Array(45).keys()].map(n => n + 201))
-            .concat([...Array(69).keys()].map(n => n + 300))
-            .concat([...Array(48).keys()].map(n => n + 400))
-            .concat([...Array(36).keys()].map(n => n + 501));
+        var numbers = [];
+            
         var records = {};
         var images = {};
         var currentIndex = 0;
@@ -689,52 +823,76 @@ var db;
   };
 
   function saveStateToIndexedDB() {
+    // Get all the range inputs
+    var inputs = document.getElementById('array-ranges').getElementsByTagName('input');
+
+    // Get the range values from the inputs
+    var ranges = [];
+    for (var i = 0; i < inputs.length; i++) {
+        ranges.push(inputs[i].value);
+    }
+
     var state = {
-      id: 1,
-      records: records,
-      images: images,
-      numbers: numbers,
-      currentIndex: currentIndex
+        id: 1,
+        records: records,
+        images: images,
+        numbers: numbers,
+        currentIndex: currentIndex,
+        arrayRanges: ranges // save the ranges array
     };
 
     var transaction = db.transaction(["state"], "readwrite");
-
     transaction.oncomplete = function(event) {
-      console.log("All done!");
+        console.log("All done!");
     };
-
     transaction.onerror = function(event) {
-      console.log("Error saving state to indexedDB:", event);
+        console.log("Error saving state to indexedDB:", event);
     };
-
     var objectStore = transaction.objectStore("state");
     var request = objectStore.put(state);
     request.onsuccess = function(event) {
-      console.log("State saved to indexedDB!");
+        console.log("State saved to indexedDB!");
     };
-  }
+}
 
-  function loadStateFromIndexedDB() {
+function loadStateFromIndexedDB() {
     var transaction = db.transaction(["state"]);
     var objectStore = transaction.objectStore("state");
     var request = objectStore.get(1);
 
     request.onerror = function(event) {
-      console.log("Error loading state from indexedDB:", event);
+        console.log("Error loading state from indexedDB:", event);
     };
 
-    request.onsuccess = function(event) {
-      if (request.result) {
-        records = request.result.records;
-        images = request.result.images;
-        numbers = request.result.numbers;
-        currentIndex = request.result.currentIndex;
-        setNumber();
-      } else {
-        console.log("No data record");
-      }
+     request.onsuccess = function(event) {
+        if (request.result) {
+            records = request.result.records;
+            images = request.result.images;
+            numbers = request.result.numbers;
+            currentIndex = request.result.currentIndex;
+
+            var ranges = request.result.arrayRanges;
+
+            // Remove all current range inputs
+            var div = document.getElementById('array-ranges');
+            while (div.firstChild) {
+                div.removeChild(div.firstChild);
+            }
+
+            // Add a new range input for each range
+            for (var i = 0; i < ranges.length; i++) {
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.value = ranges[i];
+                div.appendChild(input);
+            }
+
+            setNumber();
+        } else {
+            console.log("No data record");
+        }
     };
-  }
+}
  function clearData() {
     // Clear pictures
     let picArea = document.getElementById("picArea");
@@ -775,6 +933,92 @@ function handleCommentChange(event, number) {
 document.getElementById('comment').addEventListener('input', function(e) {
     handleCommentChange(e, numbers[currentIndex]);
 });
+
+
+function updateNumbers() {
+    // Get all the range inputs
+    var inputs = document.getElementById('array-ranges').getElementsByTagName('input');
+
+    // Initialize the numbers array
+    numbers = [];
+
+    // Parse each range and add the numbers to the array
+    for (var i = 0; i < inputs.length; i++) {
+        var range = inputs[i].value.split('-');
+        var start = Number(range[0]);
+        var end = Number(range[1]);
+        var newNumbers = Array.from({length: end - start + 1}, (_, i) => start + i);
+        numbers = numbers.concat(newNumbers);
+    }
+
+
+    // Reset the current index
+    currentIndex = 0;
+
+    // Update the application state
+    setNumber();
+
+    // Save the new state to IndexedDB
+    saveStateToIndexedDB();
+}
+
+function addRangeInput() {
+    var div = document.getElementById('array-ranges');
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'input-wrapper'; // Add a class to style the wrapper later
+    div.appendChild(wrapper);
+
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'range-input'; // Add a class to style the input later
+    wrapper.appendChild(input);
+
+    var clearButton = document.createElement('button');
+    clearButton.textContent = 'clear';
+    clearButton.className = 'clear-button'; // Add a class to style the button later
+    clearButton.onclick = function() {
+        input.value = '';
+    };
+    wrapper.appendChild(clearButton);
+}
+
+function removeRangeInput() {
+    // Get the array-ranges div
+    var div = document.getElementById('array-ranges');
+
+    // Remove the last child element (the last range input)
+    if (div.lastChild) {
+        div.removeChild(div.lastChild);
+    }
+}
+function toggleMenu() {
+    var menu = document.getElementById('menu');
+    if (menu.classList.contains('menu-hidden')) {
+        menu.classList.remove('menu-hidden');
+        menu.classList.add('menu-visible');
+    } else {
+        menu.classList.remove('menu-visible');
+        menu.classList.add('menu-hidden');
+    }
+}
+
+function closeMenu() {
+    var menu = document.getElementById('menu');
+    menu.classList.remove('menu-visible');
+    menu.classList.add('menu-hidden');
+}
+// This function checks if a click event is inside an element
+document.addEventListener('click', function(event) {
+    var menu = document.getElementById('menu');
+    var button = document.getElementById('menu-button'); // updated this line
+
+    // If the menu is visible and the click is not within the menu or the button, close the menu
+    if (menu.classList.contains('menu-visible') && !menu.contains(event.target) && event.target !== button) {
+        closeMenu();
+    }
+});
+
     </script>
 </body>
 </html>
