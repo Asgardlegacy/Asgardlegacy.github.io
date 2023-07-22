@@ -312,7 +312,7 @@
     position: absolute;
     top: 0;
     right: -8px;
-    width: 50px;
+    width: 50%;
     height: 100%;
     border: 1px solid black;
     background: lightgray;
@@ -343,7 +343,7 @@
     <input type="text" id="fullName" placeholder="First and Last Name" required />
     <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
 </form>
-<br><br><br><br><br>
+
 
 
 <div id="menu" class="menu-hidden">
