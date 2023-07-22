@@ -237,7 +237,7 @@
       }
 
       #personalInfo {
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 20px;
         display: flex;
@@ -353,9 +353,16 @@
         {
         position: relative;
         top: 1px;
-
       }
 
+
+#personalinfo1{
+    
+    
+  
+ 
+  
+}
     </style>
   </head>
 
@@ -373,7 +380,9 @@
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
 
-    
+    <br><br><br>
+
+<div id="personalinfo1">
 
 
 
@@ -382,13 +391,13 @@
       <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
     </form>
 
-
+</div>
 
 
 
     <div id="menu" class="menu-hidden">
       <button id="close-menu-button" onclick="closeMenu()">Close</button>
-   
+     /* <br><br><br><br><br><br> */
       <div class="array-settings">
         <div class="array-settings">
           <div id="array-ranges">
