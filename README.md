@@ -390,7 +390,7 @@
 
     <div id="menu" class="menu-hidden">
       <button id="close-menu-button" onclick="closeMenu()">Close</button>
-      <br><br><br><br><br><br>
+    /*  <br><br><br><br><br><br> */
       <div class="array-settings">
         <div class="array-settings">
           <div id="array-ranges">
