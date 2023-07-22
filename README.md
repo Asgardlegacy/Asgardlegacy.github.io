@@ -366,7 +366,7 @@
     <button onclick="removeRangeInput()">Remove Range</button>
     <button id="update-numbers-button" onclick="updateNumbers()">Update Numbers</button>
 
-    </div></div></div>
+    </div>
 
 
     
