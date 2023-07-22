@@ -305,7 +305,7 @@
 }
 
 .range-input {
-    width: 100%;
+    width: 50%;
 }
 
 .clear-button {
@@ -323,6 +323,10 @@
     top:1px;
   
 }
+#postbox{
+  
+  position:relative;
+}
 
     </style>
 </head>
@@ -338,12 +342,16 @@
     </div>
     
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
+<br><br>
+<div id="postbox">
 
 <form id="personalInfo" class="form-group">
     <input type="text" id="fullName" placeholder="First and Last Name" required />
     <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
 </form>
 
+
+</div>
 
 
 <div id="menu" class="menu-hidden">
