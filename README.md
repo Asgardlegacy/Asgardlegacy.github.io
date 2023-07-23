@@ -315,17 +315,27 @@
         cursor: pointer;
       }
 
+#close-menu--button:active {
+        position: absolute;
+        top: 1px;
+      }
+
       #update-numbers-button {
         position: absolute;
         left: 0;
         top: 50px;
         width: 100%;
         height: 50px;
-        background-color: blue;
+       background-color: #7892c2;
         color: white;
         font-size: 20px;
         border: none;
         cursor: pointer;
+      }
+      
+       #update-numbers-button:active {
+        position: absolute;
+        top: 49px;
       }
 
       .input-wrapper {
@@ -400,7 +410,7 @@
 
     <div id="menu" class="menu-hidden">
       <button id="close-menu-button" onclick="closeMenu()">Close</button>
-      /* <br><br><br><br><br><br> */
+       <br><br><br><br><br><br>  <!-- Range break -->
       <div class="array-settings">
         <div class="array-settings">
           <div id="array-ranges">
@@ -483,15 +493,7 @@
         <button class="notext" onclick="nextNumber()">Next</button>
       </div>
       <script>
-        /*        var doubleTouchStartTimestamp = 0;
-        document.addEventListener("touchstart", function (event) {
-            var now = Date.now();
-            if (doubleTouchStartTimestamp + 500 > now) {
-                event.preventDefault();
-            }
-            doubleTouchStartTimestamp = now;
-        });
-*/
+   
         var options = ["Locked", "Vacant", "Overlocked", "No Lock", "Locked Open", "Needs Repair"];
 
         var numbers = [];
