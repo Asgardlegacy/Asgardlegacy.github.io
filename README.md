@@ -363,7 +363,7 @@
       
        #numberunit {
         position:fixed;
-        top: 95px;
+        top: 115px;
       }
 
     </style>
@@ -382,7 +382,7 @@
 
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
   
 
     <div id="personalinfo1">
