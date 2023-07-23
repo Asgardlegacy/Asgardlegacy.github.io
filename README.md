@@ -1116,6 +1116,7 @@
           var menu = document.getElementById('menu');
           menu.classList.remove('menu-visible');
           menu.classList.add('menu-hidden');
+          updateNumbers();
         }
         // This function checks if a click event is inside an element
         document.addEventListener('click', function(event) {
