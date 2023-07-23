@@ -340,7 +340,7 @@
 
       .input-wrapper {
         position: relative;
-        width: 100%;
+        width: 50%;
       }
 
       .range-input {
@@ -348,9 +348,10 @@
       }
 
       .clear-button {
+        
         position: absolute;
         top: 0;
-        right: -8px;
+        left: 130px;
         width: 50%;
         height: 100%;
         border: 1px solid black;
