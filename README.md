@@ -356,7 +356,15 @@
       }
 
 
-      #personalinfo1 {}
+      #number-search {
+        position:fixed;
+        top: 95px;
+      }
+      
+       #numberunit {
+        position:fixed;
+        top: 95px;
+      }
 
     </style>
   </head>
@@ -374,8 +382,8 @@
 
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
-
-    <br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+  
 
     <div id="personalinfo1">
 
@@ -410,15 +418,20 @@
 
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search Unit..." />
-    <h1 id="number"></h1>
-    <div id="commentArea">
+   <div id="numberunit">
+   
+   <h1 id="number"></h1>
+   
+   
+   </div>
+   <div id="commentArea">
 
       <label for="comment"></label><br>
       <input type="text" id="comment" name="comment" placeholder="Comment...">
     </div>
     <div id="options" class="options-grid"></div>
 
-    <div id="commentArea">
+   
 
 
 
