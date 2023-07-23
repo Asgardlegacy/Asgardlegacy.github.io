@@ -351,8 +351,8 @@
         
         position: absolute;
         top: 0;
-        left: 130px;
-        width: 50%;
+        left: 133px;
+        width: 85px;
         height: 100%;
         border: 1px solid black;
         background: lightgray;
