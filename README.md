@@ -377,6 +377,19 @@
         top: 115px;
       }
 
+@media only screen and (min-width: 768px) {
+  .desktop-line-break {
+    display: block;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .desktop-line-break {
+    display: none;
+  }
+}
+  
+
+
     </style>
   </head>
 
@@ -394,6 +407,12 @@
     <input type="file" id="loadState" style="display: none" accept="application/json" onchange="loadState(event)" />
 
 <br><br><br><br>
+<br class="desktop-line-break"><br class="desktop-line-break"><br class="desktop-line-break"><br class="desktop-line-break"><br class="desktop-line-break"><br class="desktop-line-break">
+
+
+
+
+
   
 
     <div id="personalinfo1">
