@@ -275,6 +275,7 @@
       }
 
       #menu {
+        touch-action: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -387,7 +388,37 @@
     display: none;
   }
 }
-  
+ .button-container {
+    position:absolute;
+    left:0;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    
+   
+    
+}
+
+.button-container button {
+    flex: 1;
+    
+    height: 40px;
+    margin: 0;
+  border:none;
+  border-right: 1px solid black;
+ 
+   background-color: #7892c2;
+        color: white;
+        font-size: 12px;
+       }
+        .button-container button:hover {
+        background-color: #476e9e;
+      }
+       
+ .button-container button:active{
+        position: relative;
+        top: 1px;
+      }
 
 
     </style>
@@ -436,8 +467,10 @@
           <div id="array-ranges">
             <!-- Range inputs will be added here -->
           </div>
+          <div class="button-container">
           <button onclick="addRangeInput()">Add Range</button>
           <button onclick="removeRangeInput()">Remove Range</button>
+          </div>
           <button id="update-numbers-button" onclick="updateNumbers()">Update Numbers</button>
 
         </div>
