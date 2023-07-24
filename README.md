@@ -273,6 +273,18 @@
         box-sizing: border-box;
         border-radius: 5px;
       }
+#menuheight{
+  position: fixed;
+  width:100%;
+  overflow-y: auto;
+  padding-right: 0px;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 92%;
+  
+}
+
 
       #menu {
        touch-action: manipulation;
@@ -282,6 +294,7 @@
         width: 250px;
         height: 100%;
         padding: 20px;
+        padding-bottom: 20%;
         background-color: #f4f4f4;
         overflow-y: auto;
         transition: transform 0.3s ease;
@@ -291,7 +304,7 @@
 
       #menu input[type='text'] {
         display: block;
-        width: 100%;
+        width: 95%;
         margin-bottom: 10px;
       }
 
@@ -419,7 +432,26 @@
         position: relative;
         top: 1px;
       }
-
+#menufooter{
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
+}
+#clearall {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        
+        background-color: red;
+        color: white;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+      }
 
     </style>
   </head>
@@ -459,7 +491,10 @@
 
 
 
+
+
     <div id="menu" class="menu-hidden">
+    <div id="menuheight">
       <button id="close-menu-button" onclick="closeMenu()">Close</button>
        <br><br><br><br><br><br>  <!-- Range break -->
       <div class="array-settings">
@@ -470,9 +505,15 @@
           <div class="button-container">
           <button onclick="addRangeInput()">Add Range</button>
           <button onclick="removeRangeInput()">Remove Range</button>
+          
           </div>
           <button id="update-numbers-button" onclick="updateNumbers()">Update Numbers</button>
-
+          </div>
+          <div id="menufooter">
+          
+         
+          <button id="clearall" onclick="clearUnusedData()">Delete Unused Data</button>
+ </div>
         </div>
       </div>
     </div>
@@ -1038,6 +1079,8 @@
                 div.appendChild(input);
               }
 
+
+
               setNumber();
             } else {
               console.log("No data record");
@@ -1181,6 +1224,34 @@
           }
         });
 
+function clearUnusedData() {
+    // Show a confirmation dialog
+    var confirmed = confirm("This action is not reversible and anything not part of the current array series will be deleted. Please make sure you UPDATE NUMBERS before you proceed. Are you sure you want to proceed?");
+    // If the user clicked OK, proceed with the deletion
+    if (confirmed) {
+        // Iterate over the records object
+        for (let key in records) {
+            // If the key is not in the numbers array, delete it
+            if (!numbers.includes(Number(key))) {
+                delete records[key];
+            }
+        }
+
+        // Iterate over the images object
+        for (let key in images) {
+            // Split the key to get the number part (the part before the '-')
+            let numberPart = Number(key.split('-')[0]);
+
+            // If the number part is not in the numbers array, delete it
+            if (!numbers.includes(numberPart)) {
+                delete images[key];
+            }
+        }
+
+        // Save the state to IndexedDB
+        saveStateToIndexedDB();
+    }
+}
       </script>
   </body>
 
