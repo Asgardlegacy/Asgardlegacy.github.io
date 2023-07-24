@@ -156,9 +156,7 @@
       }
 
 
-      .focused {
-        background-color: #f0f0f0;
-      }
+     
 
       .picture-upload {
         position: relative;
@@ -271,6 +269,7 @@
         height: 35px;
         padding: 1px;
         box-sizing: border-box;
+        border: 1px solid gray;
         border-radius: 5px;
       }
 #menuheight{
