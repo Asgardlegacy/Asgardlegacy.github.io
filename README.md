@@ -10,12 +10,22 @@
         touch-action: none;
         /* Prevent double click to zoom */
         user-select: none;
-        background-color: white;
+        background-color: lightsteelblue;
       }
 
       input {
         user-select: auto;
+         outline: none;
       }
+
+#search input {
+height: 25px;
+border: 1px solid grey;
+  box-shadow: 1px 1px 1px 1px black inset ;
+  outline: none;
+  background-color: azure;
+  padding-left: 10px;
+}
 
       .top-button-group {
         position: fixed;
@@ -92,18 +102,25 @@
         text-align: center;
         cursor: pointer;
         border-radius: 5px;
-        background-color: white;
-
+        background-color: steelblue;
+box-shadow: 1px 1px 2px 1px black;
+ color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       }
 
 
       .option input[type="checkbox"] {
         display: none;
         background-color: white;
+       
+        
       }
 
       .option.checked {
-        background-color: #ddd;
+        background-color: lightslategray;
+        box-shadow: 1px 1px 4px 1px black inset;
+       color: red;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       }
 
       .button-group {
@@ -193,7 +210,10 @@
         text-align: center;
         cursor: pointer;
         border-radius: 5px;
-        background-color: white;
+        background-color: azure;
+        color:black;
+        box-shadow: 1px 1px 2px 1px black inset;
+       
       }
 
       .notext {
@@ -220,19 +240,13 @@
         text-align: center;
         cursor: pointer;
         border-radius: 5px;
-        background-color: white;
+       
+        background-color: azure;
+        color:black;
+        box-shadow: 1px 1px 2px 1px black inset;
       }
 
-      .notext {
-        user-select: none;
-        /* standard syntax */
-        -webkit-user-select: none;
-        /* Chrome, Safari, and Opera syntax */
-        -moz-user-select: none;
-        /* Firefox syntax */
-        -ms-user-select: none;
-        /* IE and Edge syntax */
-      }
+     
 
       #personalInfo {
         position: fixed;
@@ -243,6 +257,7 @@
         width: 100%;
         margin: 0 auto;
         padding: 20px 0;
+        
       }
 
       #personalInfo input {
@@ -251,6 +266,9 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        background-color: azure;
+        color:black;
+        box-shadow: 1px 1px 2px 1px black inset;
       }
 
       #background-box {
@@ -259,7 +277,7 @@
         left: 0;
         width: 100%;
         height: 90px;
-        background: white;
+        background-color: lightsteelblue;
         /* Ensures the div is behind all other elements */
       }
 
@@ -267,10 +285,13 @@
         width: 100%;
         /* adjust this to match the total width of checkboxes */
         height: 35px;
-        padding: 1px;
+        padding: 10px;
         box-sizing: border-box;
         border: 1px solid gray;
         border-radius: 5px;
+       background-color: azure;
+        color:black;
+        box-shadow: 1px 1px 2px 1px black inset;
       }
 #menuheight{
   position: fixed;
@@ -305,6 +326,7 @@
         display: block;
         width: 95%;
         margin-bottom: 10px;
+        
       }
 
       .menu-hidden {
@@ -518,10 +540,13 @@
     </div>
 
 
+<div id="search">
+
 
 
     <input type="text" pattern="\d*" id="number-search" oninput="searchNumber()" placeholder="Search Unit..." />
-   <div id="numberunit">
+</div>
+<div id="numberunit">
    
    <h1 id="number"></h1>
    
