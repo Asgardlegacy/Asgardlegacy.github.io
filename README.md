@@ -92,6 +92,7 @@ border: 1px solid grey;
         padding: 0px;
         text-align: center;
         cursor: pointer;
+        
       }
 
       .option {
@@ -107,6 +108,8 @@ border: 1px solid grey;
 box-shadow: 1px 1px 2px 1px black;
  color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  border-color:steelblue;
+ 
       }
 
 
@@ -236,6 +239,7 @@ box-shadow: 1px 1px 2px 1px black;
         box-sizing: border-box;
         border: 1px solid #ccc;
         height: 100px;
+        width: 100px;
         margin: 0px;
         padding: 0px;
         text-align: center;
@@ -596,7 +600,7 @@ box-shadow: 1px 1px 2px 1px black;
         <div class="option3">
           <label class="picture-upload">
             <input type="file" accept="image/*" onchange="handlePictureSelect(event, numbers[currentIndex], 4)" />
-            Upload Picture
+            Profile Picture
             <img id="picture-preview-4" class="picture-preview" style="display: none;" onclick="handlePictureUpload(numbers[currentIndex], 4)" />
           </label>
         </div>
