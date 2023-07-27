@@ -844,6 +844,11 @@ box-shadow: 1px 1px 2px 1px black;
                     e.preventDefault();
                 });
         */
+        document.addEventListener('touchmove', function (event) {
+  if (event.scale !== 1) { event.preventDefault(); }
+}, { passive: false });
+        
+        
         function downloadJSON() {
           var state = JSON.stringify({
             records: records,
